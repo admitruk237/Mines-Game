@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-start: #1d293d;
+  --color-bg-end: #0f172b;
+  --background-image-main-gradient: linear-gradient(180deg, #1d293d 0%, #0f172b 100%);
+}
