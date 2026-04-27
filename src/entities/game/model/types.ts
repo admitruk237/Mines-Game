@@ -31,6 +31,11 @@ export interface Game {
   status: GameStatus;
   revealedCells: RevealedCell[];
   gemsFound?: number;
+  fullBoard?: FullBoard;
+}
+
+export interface CreateGameResponse extends Game {
+  balance: number;
 }
 
 export interface CreateGameRequest {
@@ -43,23 +48,32 @@ export interface RevealRequest {
   col: number;
 }
 
-export interface BalanceResponse {
+export type FullBoard = CellType[][];
+
+export interface RevealGemResponse {
+  result: 'gem';
+  status: typeof GameStatus.ACTIVE;
+  currentMultiplier: number;
+  revealedCells: RevealedCell[];
+  gemsFound: number;
+  nextMultiplier: number;
+}
+
+export interface RevealMineResponse {
+  result: 'mine';
+  status: typeof GameStatus.LOST;
+  revealedCell: RevealedCell;
+  fullBoard: FullBoard;
   balance: number;
 }
 
-export interface HistoryItem {
-  gameId: string;
-  betAmount: number;
-  minesCount: number;
+export type RevealResponse = RevealGemResponse | RevealMineResponse;
+
+export interface CashOutResponse {
   status: GameStatus;
-  multiplier: number;
+  cashedOutMultiplier: number;
+  winAmount: number;
   profit: number;
-  gemsFound: number;
-  createdAt: string;
+  fullBoard: FullBoard;
+  balance: number;
 }
-
-export interface HistoryResponse {
-  games: HistoryItem[];
-}
-
-export type FullBoard = CellType[][];
