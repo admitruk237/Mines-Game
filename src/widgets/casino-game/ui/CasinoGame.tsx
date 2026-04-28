@@ -11,7 +11,7 @@ export const CasinoGame = () => {
   const renderBoardContent = () => {
     if (isLoading) {
       return (
-        <div className="w-full max-w-[500px] aspect-square rounded-xl bg-slate-800/20 animate-pulse border border-slate-800" />
+        <div className="w-full max-w-[500px] aspect-square rounded-xl bg-skeleton-bg/50 animate-pulse border border-slate-800" />
       );
     }
 

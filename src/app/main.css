@@ -7,7 +7,7 @@
 
 @theme {
   --color-bg-main: #0e1119;
-  --color-panel-bg: #161b28;
+  --color-panel-bg: #111620;
 
   /* Cell Colors from Figma */
   --color-cell-bg: #1a1f2e;
@@ -40,6 +40,15 @@
     #17a64c 90.91%,
     #16a34a 100%
   );
+
+  /* History & Text Colors */
+  --color-history-bg: #0a0e17;
+  --color-history-border: #1a1f2e;
+  --color-text-muted: #7a8599;
+  --color-text-win: #22c55e;
+  --color-text-loss: #ef4444;
+  --color-text-balance: #fbbf24;
+  --color-skeleton-bg: #1a1f2e;
 }
 
 @theme inline {

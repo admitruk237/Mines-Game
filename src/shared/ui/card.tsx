@@ -9,9 +9,14 @@ const CARD_VARIANTS = cva(
         default: '',
         sm: '',
       },
+      variant: {
+        default: 'bg-card text-card-foreground ring-1 ring-foreground/10',
+        panel: 'bg-panel-bg border border-history-border p-[25px] rounded-[14px]',
+      },
     },
     defaultVariants: {
       size: 'default',
+      variant: 'default',
     },
   }
 );
@@ -19,13 +24,17 @@ const CARD_VARIANTS = cva(
 function Card({
   className,
   size = 'default',
+  variant = 'default',
   ...props
-}: React.ComponentProps<'div'> & { size?: 'default' | 'sm' }) {
+}: React.ComponentProps<'div'> & {
+  size?: 'default' | 'sm';
+  variant?: 'default' | 'panel';
+}) {
   return (
     <div
       data-slot="card"
       data-size={size}
-      className={cn(CARD_VARIANTS({ size }), className)}
+      className={cn(CARD_VARIANTS({ size, variant }), className)}
       {...props}
     />
   );

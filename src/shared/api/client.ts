@@ -1,5 +1,7 @@
 import { API_BASE_URL } from '../config/env';
 import { REQUEST_TIMEOUT_MS } from '../config/game';
+import { PLAYER_ID_HEADER } from '../config/api';
+import { getPlayerId } from '../lib/playerId';
 
 export class ApiError extends Error {
   constructor(
@@ -24,6 +26,7 @@ export const apiFetch = async <TResponse, TBody = unknown>(
       signal: controller.signal,
       headers: {
         'Content-Type': 'application/json',
+        [PLAYER_ID_HEADER]: getPlayerId(),
         ...options?.headers,
       },
       body: options?.body ? JSON.stringify(options.body) : undefined,
