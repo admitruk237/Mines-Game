@@ -6,9 +6,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-bg-start: #1d293d;
-  --color-bg-end: #0f172b;
-  --background-image-main-gradient: linear-gradient(180deg, #1d293d 0%, #0f172b 100%);
+  --color-bg-main: #0e1119;
+  
+  /* Cell Colors from Figma */
+  --color-cell-bg: #1a1f2e;
+  --color-cell-border: #252d3f;
+  --color-cell-gem-bg: #22c55e4d;
+  --color-cell-gem-border: #22c55e;
+  --color-cell-mine-bg: #ef444466;
+  --color-cell-mine-border: #ef444466;
 }
 
 @theme inline {
