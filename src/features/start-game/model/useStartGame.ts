@@ -6,7 +6,7 @@ export const useStartGame = () => {
   const createGameMutation = useCreateGame();
 
   const startGame = (betAmount: number, minesCount: number) => {
-    return createGameMutation.mutate(
+    createGameMutation.mutate(
       { betAmount, minesCount },
       {
         onSuccess: (data) => {

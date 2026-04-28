@@ -11,22 +11,25 @@ const cellVariants = cva(
   {
     variants: {
       state: {
-        [CellState.HIDDEN]:   'bg-cell-bg border-cell-border hover:bg-cell-border cursor-pointer active:translate-y-0.5',
-        [CellState.GEM]:      'bg-cell-gem-bg border-cell-gem-border',
-        [CellState.MINE]:     'bg-cell-mine-bg border-cell-mine-border opacity-40',
-        [CellState.MINE_HIT]: 'bg-cell-mine-bg border-red-500 animate-in zoom-in duration-300 ring-2 ring-red-500/50',
-        [CellState.INACTIVE]: 'bg-cell-bg/40 border-cell-border/40 cursor-not-allowed grayscale opacity-50',
-        [CellState.LOADING]:  'bg-cell-bg border-cell-border animate-pulse cursor-wait',
+        [CellState.HIDDEN]:
+          'bg-cell-bg border-cell-border hover:bg-cell-border cursor-pointer active:translate-y-0.5',
+        [CellState.GEM]: 'bg-cell-gem-bg border-cell-gem-border',
+        [CellState.MINE]: 'bg-cell-mine-bg border-cell-mine-border opacity-40',
+        [CellState.MINE_HIT]:
+          'bg-cell-mine-bg border-red-500 animate-in zoom-in duration-300 ring-2 ring-red-500/50',
+        [CellState.INACTIVE]:
+          'bg-cell-bg/40 border-cell-border/40 cursor-not-allowed grayscale opacity-50',
+        [CellState.LOADING]: 'bg-cell-bg border-cell-border animate-pulse cursor-wait',
       },
     },
   }
 );
 
 const ICON_BY_STATE: Partial<Record<CellState, ReactNode>> = {
-  [CellState.GEM]:      <CellIcon type={CellType.GEM} className="w-7 h-7" />,
-  [CellState.MINE]:     <CellIcon type={CellType.MINE} className="w-7 h-7" />,
+  [CellState.GEM]: <CellIcon type={CellType.GEM} className="w-7 h-7" />,
+  [CellState.MINE]: <CellIcon type={CellType.MINE} className="w-7 h-7" />,
   [CellState.MINE_HIT]: <CellIcon type={CellType.MINE} className="w-7 h-7 text-white" />,
-  [CellState.LOADING]:  <Loader2 className="w-7 h-7 animate-spin text-slate-500" />,
+  [CellState.LOADING]: <Loader2 className="w-7 h-7 animate-spin text-slate-500" />,
 };
 
 interface Props {
@@ -39,7 +42,7 @@ const CLICKABLE_STATES: CellState[] = [CellState.HIDDEN];
 
 export const Cell = ({ state, onClick, ariaLabel }: Props) => {
   const isClickable = CLICKABLE_STATES.includes(state);
-  
+
   return (
     <button
       type="button"

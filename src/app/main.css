@@ -7,7 +7,8 @@
 
 @theme {
   --color-bg-main: #0e1119;
-  
+  --color-panel-bg: #161b28;
+
   /* Cell Colors from Figma */
   --color-cell-bg: #1a1f2e;
   --color-cell-border: #252d3f;
@@ -24,7 +25,21 @@
   --color-bet-action-bg: #1a1f2e;
   --color-bet-action-text: #7a8599;
   --color-active-blue: #3b82f6;
-  --background-image-bet-gradient: linear-gradient(180deg, #22C55E 0%, #21C25C 9.09%, #20BF5A 18.18%, #1FBC58 27.27%, #1EB857 36.36%, #1DB555 45.45%, #1BB253 54.55%, #1AAF51 63.64%, #19AC4F 72.73%, #18A94E 81.82%, #17A64C 90.91%, #16A34A 100%);
+  --background-image-bet-gradient: linear-gradient(
+    180deg,
+    #22c55e 0%,
+    #21c25c 9.09%,
+    #20bf5a 18.18%,
+    #1fbc58 27.27%,
+    #1eb857 36.36%,
+    #1db555 45.45%,
+    #1bb253 54.55%,
+    #1aaf51 63.64%,
+    #19ac4f 72.73%,
+    #18a94e 81.82%,
+    #17a64c 90.91%,
+    #16a34a 100%
+  );
 }
 
 @theme inline {

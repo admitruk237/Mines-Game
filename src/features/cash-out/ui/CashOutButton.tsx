@@ -2,6 +2,7 @@ import { useCashOut } from '../model/useCashOut';
 import type { Game } from '@/entities/game/model/types';
 import { Button } from '@/shared/ui/button';
 import { Loader2 } from 'lucide-react';
+import { formatCurrency } from '@/shared/lib/formatCurrency';
 
 interface Props {
   game: Game;
@@ -11,7 +12,7 @@ export const CashOutButton = ({ game }: Props) => {
   const { cashOut, isPending } = useCashOut(game.gameId);
 
   const canCashOut = (game.gemsFound ?? 0) > 0;
-  const winAmount = (game.betAmount * game.currentMultiplier).toFixed(2);
+  const winAmount = game.betAmount * game.currentMultiplier;
 
   return (
     <Button
@@ -21,7 +22,11 @@ export const CashOutButton = ({ game }: Props) => {
       disabled={isPending || !canCashOut}
       className="w-full"
     >
-      {isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : `Cash Out — ${winAmount} USD`}
+      {isPending ? (
+        <Loader2 className="w-5 h-5 animate-spin" />
+      ) : (
+        `Cash Out — ${formatCurrency(winAmount)}`
+      )}
     </Button>
   );
 };

@@ -2,7 +2,7 @@ import type { Game } from '@/entities/game/model/types';
 import { buildBoardState } from '@/entities/game/lib/buildBoardState';
 import { Cell, CellState } from '@/entities/cell';
 import { useRevealCellAction } from '@/features/reveal-cell/model/useRevealCellAction';
-import { usePendingStatus } from '@/features/reveal-cell/model/usePendingStatus';
+import { usePendingCellsStore } from '@/features/reveal-cell/model/usePendingCellsStore';
 
 interface Props {
   game: Game;
@@ -10,7 +10,8 @@ interface Props {
 
 export const GameBoard = ({ game }: Props) => {
   const { reveal } = useRevealCellAction(game.gameId);
-  const { pendingCell } = usePendingStatus();
+
+  const pendingCell = usePendingCellsStore((s) => s.pendingCell);
 
   const board = buildBoardState({
     status: game.status,

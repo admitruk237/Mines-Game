@@ -1,6 +1,13 @@
 import { apiFetch } from '../../../shared/api/client';
 import { ENDPOINTS } from '../../../shared/api/endpoints';
-import { Game, CreateGameRequest, CreateGameResponse, RevealRequest, RevealResponse, CashOutResponse } from '../model/types';
+import {
+  Game,
+  CreateGameRequest,
+  CreateGameResponse,
+  RevealRequest,
+  RevealResponse,
+  CashOutResponse,
+} from '../model/types';
 
 export const gameApi = {
   create: (data: CreateGameRequest) =>
@@ -20,6 +27,5 @@ export const gameApi = {
       method: 'POST',
     }),
 
-  getById: (gameId: string) =>
-    apiFetch<Game>(ENDPOINTS.GAME_BY_ID(gameId)),
+  getById: (gameId: string) => apiFetch<Game>(ENDPOINTS.GAME_BY_ID(gameId)),
 };

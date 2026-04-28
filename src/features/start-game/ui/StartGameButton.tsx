@@ -1,4 +1,3 @@
-import { useShallow } from 'zustand/react/shallow';
 import { useStartGame } from '../model/useStartGame';
 import { useBetStore } from '@/features/place-bet/model/useBetStore';
 import { useMinesStore } from '@/features/select-mines/model/useMinesStore';
@@ -7,16 +6,8 @@ import { Button } from '@/shared/ui/button';
 import { Loader2 } from 'lucide-react';
 
 export const StartGameButton = () => {
-  const { betAmount } = useBetStore(
-    useShallow((s) => ({
-      betAmount: s.betAmount,
-    }))
-  );
-  const { minesCount } = useMinesStore(
-    useShallow((s) => ({
-      minesCount: s.minesCount,
-    }))
-  );
+  const betAmount = useBetStore((s) => s.betAmount);
+  const minesCount = useMinesStore((s) => s.minesCount);
 
   const { startGame, isPending } = useStartGame();
   const { isValid } = useBetStatus();

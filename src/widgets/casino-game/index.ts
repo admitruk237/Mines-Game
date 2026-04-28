@@ -1,1 +1,1 @@
-export { CasinoGame } from './CasinoGame';
+export { CasinoGame } from './ui/CasinoGame';
