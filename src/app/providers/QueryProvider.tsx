@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { handleApiError } from '@/shared/api/handleApiError';
 
 interface Props {
   children: ReactNode;
@@ -9,6 +10,12 @@ export const QueryProvider = ({ children }: Props) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
+        queryCache: new QueryCache({
+          onError: handleApiError,
+        }),
+        mutationCache: new MutationCache({
+          onError: handleApiError,
+        }),
         defaultOptions: {
           queries: {
             retry: 1,
