@@ -15,6 +15,16 @@
   --color-cell-gem-border: #22c55e;
   --color-cell-mine-bg: #ef444466;
   --color-cell-mine-border: #ef444466;
+
+  /* Input Colors from Figma */
+  --color-input-bg: #0a0e17;
+  --color-input-border: #1a1f2e;
+
+  /* Bet Button Colors from Figma */
+  --color-bet-action-bg: #1a1f2e;
+  --color-bet-action-text: #7a8599;
+  --color-active-blue: #3b82f6;
+  --background-image-bet-gradient: linear-gradient(180deg, #22C55E 0%, #21C25C 9.09%, #20BF5A 18.18%, #1FBC58 27.27%, #1EB857 36.36%, #1DB555 45.45%, #1BB253 54.55%, #1AAF51 63.64%, #19AC4F 72.73%, #18A94E 81.82%, #17A64C 90.91%, #16A34A 100%);
 }
 
 @theme inline {
