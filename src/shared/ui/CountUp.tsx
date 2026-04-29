@@ -1,4 +1,5 @@
-import ReactCountUp from 'react-countup';
+import { useCountUp } from 'react-countup';
+import { useRef } from 'react';
 
 interface Props {
   value: number;
@@ -8,13 +9,16 @@ interface Props {
 }
 
 export const CountUp = ({ value, durationMs = 500, formatter, className }: Props) => {
-  return (
-    <ReactCountUp
-      end={value}
-      duration={durationMs / 1000}
-      formattingFn={formatter}
-      className={className}
-      preserveValue
-    />
-  );
+  const countUpRef = useRef<HTMLSpanElement>(null!);
+
+  useCountUp({
+    ref: countUpRef,
+    start: 0,
+    end: value,
+    duration: durationMs / 1000,
+    formattingFn: formatter,
+    enableReinitialize: true,
+  });
+
+  return <span ref={countUpRef} className={className} />;
 };

@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { gameKeys } from '../model/queryKeys';
-import { Game, GameStatus, RevealRequest } from '../model/types';
+import { CELL_TYPE, type Game, GAME_STATUS, type RevealRequest } from '../model/types';
 import { gameApi } from './gameApi';
+import { balanceKeys } from '@/entities/balance/model/queryKeys';
+import { historyKeys } from '@/entities/history/model/queryKeys';
 
 export const useCreateGame = () => {
   const queryClient = useQueryClient();
@@ -12,10 +14,10 @@ export const useCreateGame = () => {
       queryClient.setQueryData(gameKeys.detail(newGame.gameId), newGame);
 
       if (newGame.balance !== undefined) {
-        queryClient.setQueryData(['balance'], { balance: newGame.balance });
+        queryClient.setQueryData(balanceKeys.all, { balance: newGame.balance });
       }
 
-      queryClient.invalidateQueries({ queryKey: ['balance'] });
+      queryClient.invalidateQueries({ queryKey: balanceKeys.all });
     },
   });
 };
@@ -34,7 +36,7 @@ export const useRevealCell = (gameId: string | null) => {
       queryClient.setQueryData<Game>(gameKeys.detail(gameId), (oldGame) => {
         if (!oldGame) return undefined;
 
-        if (response.result === 'gem') {
+        if (response.result === CELL_TYPE.GEM) {
           return {
             ...oldGame,
             status: response.status,
@@ -50,12 +52,14 @@ export const useRevealCell = (gameId: string | null) => {
           status: response.status,
           revealedCells: [...oldGame.revealedCells, response.revealedCell],
           fullBoard: response.fullBoard,
+          winAmount: 0,
+          profit: -oldGame.betAmount,
         };
       });
 
-      if (response.status === GameStatus.LOST) {
-        queryClient.invalidateQueries({ queryKey: ['balance'] });
-        queryClient.invalidateQueries({ queryKey: ['history'] });
+      if (response.status === GAME_STATUS.LOST) {
+        queryClient.invalidateQueries({ queryKey: balanceKeys.all });
+        queryClient.invalidateQueries({ queryKey: historyKeys.all });
       }
     },
   });
@@ -78,11 +82,14 @@ export const useCashOut = (gameId: string | null) => {
           ...oldGame,
           status: response.status,
           fullBoard: response.fullBoard,
+          winAmount: response.winAmount,
+          profit: response.profit,
+          cashedOutMultiplier: response.cashedOutMultiplier,
         };
       });
 
-      queryClient.invalidateQueries({ queryKey: ['balance'] });
-      queryClient.invalidateQueries({ queryKey: ['history'] });
+      queryClient.invalidateQueries({ queryKey: balanceKeys.all });
+      queryClient.invalidateQueries({ queryKey: historyKeys.all });
     },
   });
 };

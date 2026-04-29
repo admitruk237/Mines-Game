@@ -1,12 +1,12 @@
-import { apiFetch } from '../../../shared/api/client';
+import { ApiError, apiFetch } from '../../../shared/api/client';
 import { ENDPOINTS } from '../../../shared/api/endpoints';
-import {
-  Game,
+import type {
+  CashOutResponse,
   CreateGameRequest,
   CreateGameResponse,
+  Game,
   RevealRequest,
   RevealResponse,
-  CashOutResponse,
 } from '../model/types';
 
 export const gameApi = {
@@ -26,6 +26,17 @@ export const gameApi = {
     apiFetch<CashOutResponse>(ENDPOINTS.CASHOUT(gameId), {
       method: 'POST',
     }),
+
+  getActive: async () => {
+    try {
+      return await apiFetch<Game>(ENDPOINTS.ACTIVE_GAME);
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 404) {
+        return null;
+      }
+      throw error;
+    }
+  },
 
   getById: (gameId: string) => apiFetch<Game>(ENDPOINTS.GAME_BY_ID(gameId)),
 };

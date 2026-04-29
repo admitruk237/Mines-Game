@@ -3,7 +3,11 @@ import { useBetStore } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
 import { Input } from '@/shared/ui/input';
 
-export const BetAmountInput = () => {
+interface Props {
+  disabled?: boolean;
+}
+
+export const BetAmountInput = ({ disabled }: Props) => {
   const { betAmount, setBetAmount } = useBetStore(
     useShallow((s) => ({
       betAmount: s.betAmount,
@@ -28,10 +32,10 @@ export const BetAmountInput = () => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <div className="flex justify-between items-center px-1">
+      <div className="flex justify-between items-center">
         <label
           htmlFor="bet-amount"
-          className="text-[11px] font-bold uppercase text-slate-500 tracking-wider"
+          className="text-[12px]  uppercase text-text-muted tracking-wider"
         >
           Bet Amount
         </label>
@@ -49,12 +53,11 @@ export const BetAmountInput = () => {
           value={betAmount || ''}
           onChange={handleChange}
           aria-invalid={hasError}
+          disabled={disabled}
           placeholder="0.00"
-          className="pr-12"
+          className="px-4"
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-[12px] font-bold text-slate-600">
-          USD
-        </div>
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-md  text-slate-600">$</div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { GameStatus } from '../../game/model/types';
+import type { GameStatus } from '../../game/model/types';
 
 export interface HistoryItem {
   gameId: string;

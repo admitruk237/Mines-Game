@@ -8,8 +8,11 @@ export const HistoryList = () => {
 
   const renderContent = () => {
     if (isLoading) {
-      return Array.from({ length: 6 }).map((_, i) => (
-        <Skeleton key={i} className="h-[73px] w-full bg-skeleton-bg/50 rounded-[10px] shrink-0" />
+      return Array.from({ length: 10 }).map((_, i) => (
+        <Skeleton
+          key={i}
+          className="h-[73px] w-[224px] bg-skeleton-bg/50 rounded-[10px] shrink-0"
+        />
       ));
     }
 
@@ -24,5 +27,9 @@ export const HistoryList = () => {
     return history.map((entry) => <HistoryItem key={entry.gameId} entry={entry} />);
   };
 
-  return <div className="flex flex-col gap-2 w-full">{renderContent()}</div>;
+  return (
+    <div className="flex flex-col gap-2 w-full h-full overflow-y-auto scrollbar-hide pb-10">
+      {renderContent()}
+    </div>
+  );
 };

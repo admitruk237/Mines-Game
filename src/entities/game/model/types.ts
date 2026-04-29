@@ -1,17 +1,17 @@
-export const GameStatus = {
+export const GAME_STATUS = {
   ACTIVE: 'active',
   WON: 'won',
   LOST: 'lost',
 } as const;
 
-export type GameStatus = (typeof GameStatus)[keyof typeof GameStatus];
+export type GameStatus = (typeof GAME_STATUS)[keyof typeof GAME_STATUS];
 
-export const CellType = {
+export const CELL_TYPE = {
   GEM: 'gem',
   MINE: 'mine',
 } as const;
 
-export type CellType = (typeof CellType)[keyof typeof CellType];
+export type CellType = (typeof CELL_TYPE)[keyof typeof CELL_TYPE];
 
 export interface CellPosition {
   row: number;
@@ -32,6 +32,9 @@ export interface Game {
   revealedCells: RevealedCell[];
   gemsFound?: number;
   fullBoard?: FullBoard;
+  winAmount?: number;
+  profit?: number;
+  cashedOutMultiplier?: number;
 }
 
 export interface CreateGameResponse extends Game {
@@ -52,7 +55,7 @@ export type FullBoard = CellType[][];
 
 export interface RevealGemResponse {
   result: 'gem';
-  status: typeof GameStatus.ACTIVE;
+  status: typeof GAME_STATUS.ACTIVE;
   currentMultiplier: number;
   revealedCells: RevealedCell[];
   gemsFound: number;
@@ -61,7 +64,7 @@ export interface RevealGemResponse {
 
 export interface RevealMineResponse {
   result: 'mine';
-  status: typeof GameStatus.LOST;
+  status: typeof GAME_STATUS.LOST;
   revealedCell: RevealedCell;
   fullBoard: FullBoard;
   balance: number;

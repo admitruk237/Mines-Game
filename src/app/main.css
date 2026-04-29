@@ -6,6 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --z-header: 50;
   --color-bg-main: #0e1119;
   --color-panel-bg: #111620;
 
@@ -49,6 +50,31 @@
   --color-text-loss: #ef4444;
   --color-text-balance: #fbbf24;
   --color-skeleton-bg: #1a1f2e;
+  --color-text-status: #4a5568;
+
+  /* Glow effects */
+  --color-win-glow: rgba(34, 197, 94, 0.4);
+  --color-lose-glow: rgba(239, 68, 68, 0.4);
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Приховуємо стрілочки в інпутах */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 }
 
 @theme inline {

@@ -3,24 +3,27 @@ import { buildBoardState } from '@/entities/game/lib/buildBoardState';
 import { Cell, CellState } from '@/entities/cell';
 import { useRevealCellAction } from '@/features/reveal-cell/model/useRevealCellAction';
 import { usePendingCellsStore } from '@/features/reveal-cell/model/usePendingCellsStore';
+import { cn } from '@/shared/lib/utils';
 
 interface Props {
-  game: Game;
+  game: Game | null;
 }
 
 export const GameBoard = ({ game }: Props) => {
-  const { reveal } = useRevealCellAction(game.gameId);
+  const { reveal } = useRevealCellAction(game?.gameId ?? null);
 
   const pendingCell = usePendingCellsStore((s) => s.pendingCell);
 
   const board = buildBoardState({
-    status: game.status,
-    revealedCells: game.revealedCells,
-    fullBoard: game.fullBoard,
+    status: game?.status ?? null,
+    revealedCells: game?.revealedCells ?? [],
+    fullBoard: game?.fullBoard,
   });
 
+  const isInactive = !game;
+
   return (
-    <div className="grid grid-cols-5 gap-2 md:gap-3 w-full max-w-[500px] aspect-square">
+    <div className="grid grid-cols-5 gap-2 md:gap-3 w-full max-w-[500px] aspect-square transition-opacity duration-500">
       {board.flatMap((row, r) =>
         row.map((state, c) => {
           const isCurrentPending = pendingCell?.row === r && pendingCell?.col === c;

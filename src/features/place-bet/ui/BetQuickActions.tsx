@@ -4,7 +4,11 @@ import { useBalance } from '@/entities/balance/api/queries';
 import { Button } from '@/shared/ui/button';
 import { roundToCents } from '@/shared/lib/roundToCents';
 
-export const BetQuickActions = () => {
+interface Props {
+  disabled?: boolean;
+}
+
+export const BetQuickActions = ({ disabled }: Props) => {
   const { betAmount, setBetAmount } = useBetStore(
     useShallow((s) => ({
       betAmount: s.betAmount,
@@ -21,6 +25,7 @@ export const BetQuickActions = () => {
         variant="secondary-dark"
         size="bet"
         onClick={() => setBetAmount(roundToCents(betAmount / 2))}
+        disabled={disabled}
         className="w-full"
       >
         1/2
@@ -29,6 +34,7 @@ export const BetQuickActions = () => {
         variant="secondary-dark"
         size="bet"
         onClick={() => setBetAmount(Math.min(balance, roundToCents(betAmount * 2)))}
+        disabled={disabled}
         className="w-full"
       >
         x2
@@ -37,6 +43,7 @@ export const BetQuickActions = () => {
         variant="secondary-dark"
         size="bet"
         onClick={() => setBetAmount(balance)}
+        disabled={disabled}
         className="w-full"
       >
         Max

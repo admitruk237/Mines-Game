@@ -1,11 +1,12 @@
-import GemIcon from '@/shared/assets/icons/gem.svg';
-import MineIcon from '@/shared/assets/icons/mine.svg';
-import { CellType } from '@/entities/game/model/types';
+import { CELL_TYPE, type CellType } from '@/entities/game/model/types';
+
 import { cn } from '@/shared/lib/utils';
+import gemIcon from '@/shared/assets/icons/gem.png';
+import mineIcon from '@/shared/assets/icons/mine.png';
 
 const ICON_MAP = {
-  [CellType.GEM]: GemIcon,
-  [CellType.MINE]: MineIcon,
+  [CELL_TYPE.GEM]: gemIcon,
+  [CELL_TYPE.MINE]: mineIcon,
 };
 
 interface Props {

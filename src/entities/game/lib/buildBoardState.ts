@@ -1,5 +1,12 @@
 import { CellState } from '@/entities/cell';
-import { CellPosition, CellType, FullBoard, GameStatus, RevealedCell } from '../model/types';
+import {
+  CELL_TYPE,
+  type CellPosition,
+  type FullBoard,
+  type GameStatus,
+  type RevealedCell,
+} from '../model/types';
+
 import { GRID_SIZE } from '@/shared/config/game';
 
 interface Params {
@@ -11,19 +18,17 @@ interface Params {
 }
 
 const CELL_TYPE_TO_STATE = {
-  [CellType.GEM]: CellState.GEM,
-  [CellType.MINE]: CellState.MINE,
+  [CELL_TYPE.GEM]: CellState.GEM,
+  [CELL_TYPE.MINE]: CellState.MINE,
 } as const;
 
 export const buildBoardState = ({
-  status,
   revealedCells,
   fullBoard,
   hitCell,
   pendingCell,
 }: Params): CellState[][] => {
-  const isStarted = status !== null;
-  const initial = isStarted ? CellState.HIDDEN : CellState.INACTIVE;
+  const initial = CellState.HIDDEN;
 
   const board: CellState[][] = Array.from({ length: GRID_SIZE }, () =>
     Array<CellState>(GRID_SIZE).fill(initial)
