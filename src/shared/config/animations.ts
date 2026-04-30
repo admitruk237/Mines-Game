@@ -1,3 +1,1 @@
-export const RESULT_DISPLAY_DURATION_MS = 3_000;
-export const CELL_REVEAL_STAGGER_MS = 100;
-export const RESULT_OVERLAY_DELAY_MS = 800;
+export const MIN_LOADER_DISPLAY_MS = 600;

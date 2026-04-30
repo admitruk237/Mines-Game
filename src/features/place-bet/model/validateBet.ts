@@ -10,5 +10,8 @@ export const validateBet = (amount: number, balance: number): ValidationResult =
   if (amount > balance) {
     return { isValid: false, error: 'Insufficient balance' };
   }
+  if (amount > 10000) {
+    return { isValid: false, error: 'Max bet is 10,000' };
+  }
   return { isValid: true };
 };

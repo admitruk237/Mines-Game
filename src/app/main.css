@@ -200,3 +200,18 @@
     @apply font-sans;
   }
 }
+
+@keyframes dot-wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-dot-wave {
+  animation: dot-wave 1.2s infinite ease-in-out;
+}

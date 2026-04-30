@@ -15,8 +15,8 @@ export const BetAmountInput = ({ disabled }: Props) => {
     }))
   );
 
-  const { isAffordable } = useBetStatus();
-  const hasError = !isAffordable && betAmount > 0;
+  const { error, isValid } = useBetStatus();
+  const hasError = !isValid && betAmount > 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
@@ -35,13 +35,13 @@ export const BetAmountInput = ({ disabled }: Props) => {
       <div className="flex justify-between items-center">
         <label
           htmlFor="bet-amount"
-          className="text-[12px]  uppercase text-text-muted tracking-wider"
+          className="text-[12px] uppercase text-text-muted tracking-wider"
         >
           Bet Amount
         </label>
         {hasError && (
-          <span className="text-[10px] font-medium text-red-400 animate-in fade-in slide-in-from-right-1">
-            Insufficient balance
+          <span className="text-[10px] font-medium text-text-loss animate-in fade-in slide-in-from-right-1">
+            {error}
           </span>
         )}
       </div>

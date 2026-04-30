@@ -16,8 +16,6 @@ export const useCreateGame = () => {
       if (newGame.balance !== undefined) {
         queryClient.setQueryData(balanceKeys.all, { balance: newGame.balance });
       }
-
-      queryClient.invalidateQueries({ queryKey: balanceKeys.all });
     },
   });
 };
@@ -58,7 +56,9 @@ export const useRevealCell = (gameId: string | null) => {
       });
 
       if (response.status === GAME_STATUS.LOST) {
-        queryClient.invalidateQueries({ queryKey: balanceKeys.all });
+        if (response.balance !== undefined) {
+          queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
+        }
         queryClient.invalidateQueries({ queryKey: historyKeys.all });
       }
     },
@@ -88,7 +88,9 @@ export const useCashOut = (gameId: string | null) => {
         };
       });
 
-      queryClient.invalidateQueries({ queryKey: balanceKeys.all });
+      if (response.balance !== undefined) {
+        queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
+      }
       queryClient.invalidateQueries({ queryKey: historyKeys.all });
     },
   });

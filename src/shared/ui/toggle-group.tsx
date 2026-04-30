@@ -1,17 +1,25 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, type CSSProperties, useContext } from 'react';
 import { Toggle as BaseToggle } from '@base-ui/react/toggle';
 import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group';
 import { type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/shared/lib/utils';
 import { toggleVariants } from '@/shared/ui/toggle';
+import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
+import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
-const ToggleGroupContext = createContext<{
+interface ToggleGroupContextValue {
   variant?: VariantProps<typeof toggleVariants>['variant'];
   size?: VariantProps<typeof toggleVariants>['size'];
   spacing?: number;
   orientation?: 'horizontal' | 'vertical';
-}>({});
+}
+
+const ToggleGroupContext = createContext<ToggleGroupContextValue>({});
+
+interface ToggleGroupProps extends BaseToggleGroup.Props, VariantProps<typeof toggleVariants> {
+  spacing?: number;
+}
 
 function ToggleGroup({
   className,
@@ -21,10 +29,7 @@ function ToggleGroup({
   orientation = 'horizontal',
   children,
   ...props
-}: BaseToggleGroup.Props &
-  VariantProps<typeof toggleVariants> & {
-    spacing?: number;
-  }) {
+}: ToggleGroupProps) {
   return (
     <BaseToggleGroup
       data-spacing={spacing}
@@ -35,7 +40,7 @@ function ToggleGroup({
         props.disabled && 'opacity-50 pointer-events-none cursor-not-allowed',
         className
       )}
-      style={{ gap: `${spacing}px` } as React.CSSProperties}
+      style={{ gap: `${spacing}px` } as CSSProperties}
       {...props}
     >
       <ToggleGroupContext.Provider value={{ variant, size, spacing, orientation }}>
@@ -45,14 +50,23 @@ function ToggleGroup({
   );
 }
 
+interface ToggleGroupItemProps extends BaseToggle.Props, VariantProps<typeof toggleVariants> {}
+
 function ToggleGroupItem({
   className,
   children,
   variant = 'default',
   size = 'default',
+  onClick,
   ...props
-}: BaseToggle.Props & VariantProps<typeof toggleVariants>) {
+}: ToggleGroupItemProps) {
   const context = useContext(ToggleGroupContext);
+  const soundContext = useSoundContext();
+
+  const handleClick = (e: Parameters<NonNullable<BaseToggle.Props['onClick']>>[0]) => {
+    soundContext?.playSound(SOUND_KEYS.CLICK);
+    onClick?.(e);
+  };
 
   return (
     <BaseToggle
@@ -64,6 +78,7 @@ function ToggleGroupItem({
         'rounded-[8px]',
         className
       )}
+      onClick={handleClick}
       {...props}
     >
       {children}

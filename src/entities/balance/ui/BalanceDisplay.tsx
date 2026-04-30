@@ -39,8 +39,8 @@ export const BalanceDisplay = ({ className }: Props) => {
             💰
           </span>
           <CountUp
-            value={balance}
-            formatter={balanceFormatter}
+            end={balance}
+            formattingFn={balanceFormatter}
             className="font-mono text-[16px] font-bold text-text-balance leading-[24px]"
           />
         </div>

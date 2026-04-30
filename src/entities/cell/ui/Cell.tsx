@@ -4,6 +4,8 @@ import { CellState } from '../model/types';
 import { CELL_TYPE } from '@/entities/game/model/types';
 import { CellIcon } from './CellIcon';
 import { cn } from '@/shared/lib/utils';
+import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
+import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 import type { ReactNode } from 'react';
 
 const cellVariants = cva(
@@ -32,22 +34,30 @@ const ICON_BY_STATE: Partial<Record<CellState, ReactNode>> = {
   [CellState.LOADING]: <Loader2 className="w-7 h-7 animate-spin text-text-muted" />,
 };
 
+const CLICKABLE_STATES: CellState[] = [CellState.HIDDEN];
+
 interface Props {
   state: CellState;
   onClick?: () => void;
   ariaLabel: string;
 }
 
-const CLICKABLE_STATES: CellState[] = [CellState.HIDDEN];
-
 export const Cell = ({ state, onClick, ariaLabel }: Props) => {
   const isClickable = CLICKABLE_STATES.includes(state);
+  const { playSound } = useSoundContext();
+
+  const handleClick = () => {
+    if (isClickable) {
+      playSound(SOUND_KEYS.CLICK);
+      onClick?.();
+    }
+  };
 
   return (
     <button
       type="button"
       disabled={!isClickable}
-      onClick={onClick}
+      onClick={handleClick}
       aria-label={ariaLabel}
       className={cn(cellVariants({ state }))}
     >

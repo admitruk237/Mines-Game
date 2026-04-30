@@ -8,7 +8,7 @@ export const useRestoreSession = () => {
   const setGameId = useActiveGameStore((s) => s.setGameId);
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const query = useQuery({
     queryKey: gameKeys.active(),
     queryFn: gameApi.getActive,
     retry: false,
@@ -16,10 +16,14 @@ export const useRestoreSession = () => {
     gcTime: Infinity,
   });
 
+  const { data, isPending } = query;
+
   useEffect(() => {
     if (data?.gameId) {
       queryClient.setQueryData(gameKeys.detail(data.gameId), data);
       setGameId(data.gameId);
     }
   }, [data, queryClient, setGameId]);
+
+  return { isPending };
 };

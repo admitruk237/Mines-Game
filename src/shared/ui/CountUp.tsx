@@ -1,24 +1,32 @@
-import { useCountUp } from 'react-countup';
-import { useRef } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
+import { type CountUpProps, useCountUp } from 'react-countup';
 
-interface Props {
-  value: number;
-  durationMs?: number;
-  formatter?: (n: number) => string;
-  className?: string;
-}
+export const CountUp = (props: CountUpProps) => {
+  const countUpRef = useRef<HTMLElement>(null);
 
-export const CountUp = ({ value, durationMs = 500, formatter, className }: Props) => {
-  const countUpRef = useRef<HTMLSpanElement>(null!);
-
-  useCountUp({
-    ref: countUpRef,
-    start: 0,
-    end: value,
-    duration: durationMs / 1000,
-    formattingFn: formatter,
-    enableReinitialize: true,
+  const { update } = useCountUp({
+    // react-countup types ref as RefObject<HTMLElement> (non-null), but it
+    // safely handles null at runtime — narrow the type without `unknown`.
+    ref: countUpRef as RefObject<HTMLElement>,
+    start: props.start,
+    end: props.end,
+    duration: props.duration,
+    decimals: props.decimals,
+    separator: props.separator ?? '',
+    useGrouping: props.useGrouping ?? false,
+    decimal: props.decimal,
+    prefix: props.prefix,
+    suffix: props.suffix,
+    formattingFn: props.formattingFn,
+    onEnd: props.onEnd,
+    onStart: props.onStart,
   });
 
-  return <span ref={countUpRef} className={className} />;
+  useEffect(() => {
+    update(props.end ?? 0);
+  }, [props.end, update]);
+
+  return <span ref={countUpRef} className={props.className} />;
 };
+
+export type { CountUpProps };
