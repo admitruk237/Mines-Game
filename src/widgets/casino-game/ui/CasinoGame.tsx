@@ -9,8 +9,8 @@ export const CasinoGame = () => {
   const { data: game = null } = useGame(gameId);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-[600px] py-12">
-      <div className="w-full max-w-[500px] relative">
+    <div className="flex flex-col items-center justify-center w-full lg:min-h-[600px] py-4 lg:py-12">
+      <div className="w-full lg:max-w-[500px] relative">
         {game && (
           <div className="mb-4 text-center font-sans text-[12px] font-normal leading-[18px] text-text-status">
             {game.minesCount} Mines · {game.gemsFound || 0} gems found ·{' '}

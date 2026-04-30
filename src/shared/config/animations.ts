@@ -1,1 +1,2 @@
 export const MIN_LOADER_DISPLAY_MS = 600;
+export const RESULT_OVERLAY_DELAY_MS = 800;

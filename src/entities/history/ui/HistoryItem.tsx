@@ -11,21 +11,19 @@ export const HistoryItem = ({ entry }: Props) => {
   const isWin = entry.status === GAME_STATUS.WON;
   const profit = entry.profit ?? 0;
 
-  const formatAmount = (val: number | null | undefined) => (val ?? 0).toFixed(2);
-
   return (
-    <div className="flex flex-col items-start self-stretch h-[73px] pt-[13px] pr-[13px] pb-[1px] pl-[13px] rounded-[10px] border border-history-border bg-history-bg shrink-0 gap-[8px] w-full">
+    <div className="flex flex-col items-start self-stretch  md:p-3 p-2 rounded-[10px] border border-history-border bg-history-bg shrink-0 gap-[8px] w-32 h-[61px] md:h-[72px] md:w-[224px] lg:w-full lg:h-full">
       <div className="flex justify-between items-start w-full leading-[18px]">
         <span className="font-mono text-[12px] font-normal text-text-muted leading-[18px]">
           {formatCurrency(entry.betAmount)}
         </span>
 
         {isWin ? (
-          <span className="font-mono text-[14px] font-bold text-text-win leading-[21px]">
+          <span className="font-mono md:text-sm text-xs font-bold text-text-win leading-[21px]">
             {entry.multiplier.toFixed(2)}x
           </span>
         ) : (
-          <span className="text-[14px] leading-[14px] mt-[3px]">💣</span>
+          <span className="md:text-sm text-xs leading-[14px] mt-[3px]">💣</span>
         )}
       </div>
 
@@ -42,7 +40,7 @@ export const HistoryItem = ({ entry }: Props) => {
 
         <span
           className={cn(
-            'font-mono text-[14px] font-bold leading-[21px]',
+            'font-mono md:text-sm text-xs font-bold leading-[21px]',
             isWin ? 'text-text-win' : 'text-text-loss'
           )}
         >

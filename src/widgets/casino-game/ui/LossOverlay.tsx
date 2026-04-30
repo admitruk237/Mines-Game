@@ -9,20 +9,29 @@ interface Props {
 
 export const LossOverlay = ({ betAmount, onReset }: Props) => {
   return (
-    <ResultModal onReset={onReset} height="h-[306px]" variant="loss">
-      <span className="text-[48px] leading-[72px] filter drop-shadow-md">💣</span>
+    <ResultModal onReset={onReset} height="lg:h-[306px] h-auto" variant="loss">
+      <span className="text-[40px] lg:text-[48px] leading-tight filter drop-shadow-md">💣</span>
 
-      <h2 className="text-white text-center font-sans text-[20px] font-bold leading-[30px] tracking-[-0.449px]">
-        Busted
-      </h2>
+      <div className="flex flex-col gap-1 lg:gap-2">
+        <h2 className="text-white text-center font-sans text-[18px] lg:text-[20px] font-bold leading-tight tracking-tight">
+          Busted
+        </h2>
 
-      <p className="text-text-loss text-center font-mono text-[18px] font-bold leading-[27px]">
-        {formatCurrency(betAmount)} lost
-      </p>
+        <p className="text-text-loss text-center font-mono text-[16px] lg:text-[18px] font-bold leading-tight">
+          {formatCurrency(betAmount)} lost
+        </p>
+      </div>
 
-      <Button variant="primary-red" size="play" onClick={onReset} className="w-[316px]">
-        Try Again
-      </Button>
+      <div className="w-full mt-6 flex justify-center">
+        <Button
+          variant="primary-red"
+          size="play"
+          onClick={onReset}
+          className="w-full max-w-[316px]"
+        >
+          Try Again
+        </Button>
+      </div>
     </ResultModal>
   );
 };
