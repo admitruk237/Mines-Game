@@ -1,4 +1,4 @@
-import { useActiveGameStore, useGame } from '@/entities/game';
+import { useActiveGameStore, useGame, useStaggeredReveal } from '@/entities/game';
 import { GameBoard } from './GameBoard';
 import { GameResultOverlay } from './GameResultOverlay';
 import { TOTAL_CELLS } from '@/shared/config';
@@ -6,6 +6,7 @@ import { TOTAL_CELLS } from '@/shared/config';
 export const CasinoGame = () => {
   const gameId = useActiveGameStore((s) => s.gameId);
   const { data: game = null } = useGame(gameId);
+  const { hiddenSet, isRevealComplete } = useStaggeredReveal(game);
 
   return (
     <div className="flex flex-col items-center justify-center w-full lg:min-h-[600px] py-2 lg:py-12">
@@ -17,9 +18,9 @@ export const CasinoGame = () => {
           </div>
         )}
 
-        <GameBoard game={game} />
+        <GameBoard game={game} hiddenSet={hiddenSet} />
 
-        <GameResultOverlay game={game} />
+        <GameResultOverlay game={game} isRevealComplete={isRevealComplete} />
       </div>
     </div>
   );

@@ -1,12 +1,13 @@
 import { buildBoardState, type Game } from '@/entities/game';
-import { Cell, CELL_STATE } from '@/entities/cell';
+import { Cell, CELL_STATE, type CellState } from '@/entities/cell';
 import { usePendingCellsStore, useRevealCellAction } from '@/features/reveal-cell';
 
 interface Props {
   game: Game | null;
+  hiddenSet: Set<string>;
 }
 
-export const GameBoard = ({ game }: Props) => {
+export const GameBoard = ({ game, hiddenSet }: Props) => {
   const { reveal } = useRevealCellAction(game?.gameId ?? null);
 
   const pendingCell = usePendingCellsStore((s) => s.pendingCell);
@@ -19,14 +20,17 @@ export const GameBoard = ({ game }: Props) => {
 
   return (
     <div className="grid grid-cols-5 gap-2 md:gap-3 w-full aspect-square transition-opacity duration-500">
-      {board.flatMap((row, r) =>
-        row.map((state, c) => {
+      {board.flatMap((row: CellState[], r: number) =>
+        row.map((state: CellState, c: number) => {
+          const key = `${r}-${c}`;
           const isCurrentPending = pendingCell?.row === r && pendingCell?.col === c;
-          const finalState = isCurrentPending ? CELL_STATE.LOADING : state;
+
+          let finalState = hiddenSet.has(key) ? CELL_STATE.HIDDEN : state;
+          if (isCurrentPending) finalState = CELL_STATE.LOADING;
 
           return (
             <Cell
-              key={`${r}-${c}`}
+              key={key}
               state={finalState}
               onClick={() => reveal(r, c)}
               ariaLabel={`Cell ${r + 1}, ${c + 1}`}

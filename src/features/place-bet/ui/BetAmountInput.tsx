@@ -1,3 +1,4 @@
+import { type ChangeEvent } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useBetStore } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
@@ -18,7 +19,7 @@ export const BetAmountInput = ({ disabled }: Props) => {
   const { error, isValid } = useBetStatus();
   const hasError = !isValid && betAmount > 0;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
       setBetAmount(0);
       return;

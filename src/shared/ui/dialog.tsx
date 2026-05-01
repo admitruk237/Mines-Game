@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { DivProps } from './types';
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
 
 import { cn } from '@/shared/lib/utils';
@@ -68,7 +68,7 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
+function DialogHeader({ className, ...props }: DivProps) {
   return (
     <div data-slot="dialog-header" className={cn('flex flex-col gap-2', className)} {...props} />
   );
@@ -79,7 +79,7 @@ function DialogFooter({
   showCloseButton = false,
   children,
   ...props
-}: React.ComponentProps<'div'> & {
+}: DivProps & {
   showCloseButton?: boolean;
 }) {
   return (

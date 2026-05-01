@@ -6,26 +6,26 @@ import { LossOverlay } from './LossOverlay';
 
 interface Props {
   game: Game | null;
+  isRevealComplete: boolean;
 }
 
-export const GameResultOverlay = ({ game }: Props) => {
+export const GameResultOverlay = ({ game, isRevealComplete }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const resetGame = useActiveGameStore((s) => s.resetGame);
 
-  const isFinished = game && game.status !== GAME_STATUS.ACTIVE;
+  if (!isRevealComplete && isVisible) {
+    setIsVisible(false);
+  }
 
   useEffect(() => {
-    if (!isFinished) return;
+    if (!isRevealComplete) return;
 
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, RESULT_OVERLAY_DELAY_MS);
 
-    return () => {
-      clearTimeout(timer);
-      setIsVisible(false);
-    };
-  }, [isFinished]);
+    return () => clearTimeout(timer);
+  }, [isRevealComplete]);
 
   if (!game || !isVisible) return null;
 

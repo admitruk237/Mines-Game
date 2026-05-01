@@ -6,3 +6,4 @@ export { useRestoreSession } from './model/useRestoreSession';
 export { buildBoardState } from './lib/buildBoardState';
 export * from './model/types';
 export { gameKeys } from './model/queryKeys';
+export { useStaggeredReveal } from './model/useStaggeredReveal';

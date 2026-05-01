@@ -40,11 +40,11 @@ export const buildBoardState = ({
         board[r][c] = CELL_TYPE_TO_STATE[type];
       })
     );
+  } else {
+    revealedCells.forEach(({ row, col, type }) => {
+      board[row][col] = CELL_TYPE_TO_STATE[type];
+    });
   }
-
-  revealedCells.forEach(({ row, col, type }) => {
-    board[row][col] = CELL_TYPE_TO_STATE[type];
-  });
 
   if (hitCell) board[hitCell.row][hitCell.col] = CELL_STATE.MINE_HIT;
 

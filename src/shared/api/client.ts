@@ -6,7 +6,8 @@ import { getPlayerId } from '../lib/playerId';
 export class ApiError extends Error {
   constructor(
     public status: number,
-    message: string
+    message: string,
+    public kind: 'network' | 'timeout' | 'server' = 'server'
   ) {
     super(message);
     this.name = 'ApiError';
@@ -47,9 +48,9 @@ export const apiFetch = async <TResponse, TBody = unknown>(
     }
 
     if (error instanceof Error && error.name === 'AbortError') {
-      throw new ApiError(0, 'Request timeout. Please check your connection.');
+      throw new ApiError(0, 'Connection error', 'timeout');
     }
 
-    throw new ApiError(0, error instanceof Error ? error.message : 'Network error');
+    throw new ApiError(0, 'Connection error', 'network');
   }
 };
