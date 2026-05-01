@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useStartGame } from '../model/useStartGame';
-import { useBetStore } from '@/features/place-bet/model/useBetStore';
-import { useMinesStore } from '@/features/select-mines/model/useMinesStore';
-import { useBetStatus } from '@/features/place-bet/model/useBetStatus';
-import { Button } from '@/shared/ui/button';
-import { LoadingOverlay } from '@/shared/ui/LoadingOverlay';
-import { MIN_LOADER_DISPLAY_MS } from '@/shared/config/animations';
+import { useStartGame } from '../';
+import { useBetStatus, useBetStore } from '@/features/place-bet';
+import { useMinesStore } from '@/features/select-mines';
+import { Button, LoadingOverlay } from '@/shared/ui';
+import { MIN_LOADER_DISPLAY_MS } from '@/shared/config';
 
 export const StartGameButton = () => {
   const betAmount = useBetStore((s) => s.betAmount);

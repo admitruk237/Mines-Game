@@ -1,5 +1,4 @@
-import { ApiError, apiFetch } from '../../../shared/api/client';
-import { ENDPOINTS } from '../../../shared/api/endpoints';
+import { ApiError, apiFetch, ENDPOINTS } from '@/shared/api';
 import type {
   CashOutResponse,
   CreateGameRequest,

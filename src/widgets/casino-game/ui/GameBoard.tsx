@@ -1,8 +1,6 @@
-import type { Game } from '@/entities/game/model/types';
-import { buildBoardState } from '@/entities/game/lib/buildBoardState';
-import { Cell, CellState } from '@/entities/cell';
-import { useRevealCellAction } from '@/features/reveal-cell/model/useRevealCellAction';
-import { usePendingCellsStore } from '@/features/reveal-cell/model/usePendingCellsStore';
+import { buildBoardState, type Game } from '@/entities/game';
+import { Cell, CELL_STATE } from '@/entities/cell';
+import { usePendingCellsStore, useRevealCellAction } from '@/features/reveal-cell';
 
 interface Props {
   game: Game | null;
@@ -24,7 +22,7 @@ export const GameBoard = ({ game }: Props) => {
       {board.flatMap((row, r) =>
         row.map((state, c) => {
           const isCurrentPending = pendingCell?.row === r && pendingCell?.col === c;
-          const finalState = isCurrentPending ? CellState.LOADING : state;
+          const finalState = isCurrentPending ? CELL_STATE.LOADING : state;
 
           return (
             <Cell

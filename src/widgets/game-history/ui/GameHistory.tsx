@@ -1,5 +1,5 @@
 import { Card } from '@/shared/ui/card';
-import { HistoryList } from '@/entities/history/ui/HistoryList';
+import { HistoryList } from '@/entities/history';
 
 export const GameHistory = () => {
   return (

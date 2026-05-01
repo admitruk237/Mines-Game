@@ -1,4 +1,4 @@
-import { useCashOut as useCashOutMutation } from '@/entities/game/api/mutations';
+import { useCashOut as useCashOutMutation } from '@/entities/game';
 import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 

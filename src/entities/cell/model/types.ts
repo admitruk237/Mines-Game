@@ -1,4 +1,4 @@
-export const CellState = {
+export const CELL_STATE = {
   INACTIVE: 'inactive',
   HIDDEN: 'hidden',
   GEM: 'gem',
@@ -7,4 +7,4 @@ export const CellState = {
   LOADING: 'loading',
 } as const;
 
-export type CellState = (typeof CellState)[keyof typeof CellState];
+export type CellState = (typeof CELL_STATE)[keyof typeof CELL_STATE];

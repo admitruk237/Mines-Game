@@ -1,7 +1,6 @@
 import type { HistoryItem as HistoryEntry } from '../model/types';
-import { GAME_STATUS } from '@/entities/game/model/types';
-import { formatCurrency } from '@/shared/lib/formatCurrency';
-import { cn } from '@/shared/lib/utils';
+import { GAME_STATUS } from '@/entities/game';
+import { cn, formatCurrency } from '@/shared/lib';
 
 interface Props {
   entry: HistoryEntry;
@@ -12,7 +11,7 @@ export const HistoryItem = ({ entry }: Props) => {
   const profit = entry.profit ?? 0;
 
   return (
-    <div className="flex flex-col items-start self-stretch  md:p-3 p-2 rounded-[10px] border border-history-border bg-history-bg shrink-0 gap-[8px] w-32 h-[61px] md:h-[72px] md:w-[224px] lg:w-full lg:h-full">
+    <div className="flex flex-col items-start self-stretch md:p-3 p-2 rounded-[10px] border border-history-border bg-history-bg shrink-0 gap-[8px] w-32 h-[61px] md:h-[72px] md:w-[224px] lg:w-full lg:h-[72px]">
       <div className="flex justify-between items-start w-full leading-[18px]">
         <span className="font-mono text-[12px] font-normal text-text-muted leading-[18px]">
           {formatCurrency(entry.betAmount)}

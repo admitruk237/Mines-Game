@@ -12,14 +12,9 @@ export const LoadingOverlay = ({
   className,
 }: Props) => {
   return (
-    <div
-      className={cn(
-        'fixed inset-0 z-[100] flex items-center justify-center bg-bg-main/60 backdrop-blur-md animate-in fade-in duration-300',
-        className
-      )}
-    >
-      <div className="min-w-[160px] h-[96px] flex flex-col items-center justify-between">
-        <div className="flex gap-3 mb-1">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-bg-main/80 backdrop-blur-xl animate-in fade-in duration-300">
+      <div className={cn('flex flex-col items-center justify-center p-6', className)}>
+        <div className="flex gap-3 mb-4">
           <div className="w-4 h-4 rounded-full bg-active-blue animate-dot-wave" />
           <div className="w-4 h-4 rounded-full bg-text-win animate-dot-wave [animation-delay:200ms]" />
           <div className="w-4 h-4 rounded-full bg-text-balance animate-dot-wave [animation-delay:400ms]" />

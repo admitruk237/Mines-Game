@@ -1,8 +1,8 @@
 import { useCashOut } from '../model/useCashOut';
-import type { Game } from '@/entities/game/model/types';
-import { Button } from '@/shared/ui/button';
+import { type Game } from '@/entities/game';
+import { Button } from '@/shared/ui';
 import { Loader2 } from 'lucide-react';
-import { formatCurrency } from '@/shared/lib/formatCurrency';
+import { formatCurrency } from '@/shared/lib';
 
 interface Props {
   game: Game;

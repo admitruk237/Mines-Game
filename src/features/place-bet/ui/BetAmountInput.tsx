@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useBetStore } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
-import { Input } from '@/shared/ui/input';
+import { Input } from '@/shared/ui';
 
 interface Props {
   disabled?: boolean;

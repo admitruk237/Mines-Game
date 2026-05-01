@@ -1,15 +1,11 @@
-import { useActiveGameStatus } from '@/entities/game/model/useActiveGameStatus';
-import { useGame } from '@/entities/game/api/queries';
-import { BetAmountInput } from '@/features/place-bet/ui/BetAmountInput';
-import { BetQuickActions } from '@/features/place-bet/ui/BetQuickActions';
-import { MinesCountSelector } from '@/features/select-mines/ui/MinesCountSelector';
-import { StartGameButton } from '@/features/start-game/ui/StartGameButton';
-import { CashOutButton } from '@/features/cash-out/ui/CashOutButton';
-import { BalanceDisplay } from '@/entities/balance/ui/BalanceDisplay';
+import { useActiveGameStatus, useGame } from '@/entities/game';
+import { BalanceDisplay } from '@/entities/balance';
+import { BetAmountInput, BetQuickActions, BetQuickAmounts } from '@/features/place-bet';
+import { MinesCountSelector } from '@/features/select-mines';
+import { StartGameButton } from '@/features/start-game';
+import { CashOutButton } from '@/features/cash-out';
 import { Card } from '@/shared/ui/card';
 import { InfoStats } from './InfoStats';
-
-import { BetQuickAmounts } from '@/features/place-bet/ui/BetQuickAmounts';
 
 export const ControlPanel = () => {
   const { isActive, gameId } = useActiveGameStatus();

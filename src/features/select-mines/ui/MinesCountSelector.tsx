@@ -1,6 +1,6 @@
 import { useMinesStore } from '../model/useMinesStore';
-import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group';
-import { TOTAL_CELLS } from '@/shared/config/game';
+import { ToggleGroup, ToggleGroupItem } from '@/shared/ui';
+import { TOTAL_CELLS } from '@/shared/config';
 
 const MINES_OPTIONS = [1, 3, 5, 10, TOTAL_CELLS - 1];
 

@@ -1,5 +1,5 @@
-import { Button } from '@/shared/ui/button';
-import { formatCurrency } from '@/shared/lib/formatCurrency';
+import { Button } from '@/shared/ui';
+import { formatCurrency } from '@/shared/lib';
 import { ResultModal } from './ResultModal';
 
 interface Props {

@@ -1,4 +1,4 @@
-import { CELL_TYPE, type CellType } from '@/entities/game/model/types';
+import { CELL_TYPE, type CellType } from '@/entities/game';
 
 import { cn } from '@/shared/lib/utils';
 import gemIcon from '@/shared/assets/icons/gem.png';

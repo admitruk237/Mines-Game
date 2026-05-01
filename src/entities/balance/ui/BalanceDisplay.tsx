@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useBalance } from '../api/queries';
-import { CountUp } from '@/shared/ui/CountUp';
-import { Skeleton } from '@/shared/ui/skeleton';
+import { CountUp, Skeleton } from '@/shared/ui';
+import { incrementPlayerId } from '@/shared/lib/playerId';
 
 interface Props {
   className?: string;
@@ -10,6 +10,15 @@ interface Props {
 export const BalanceDisplay = ({ className }: Props) => {
   const { data, isLoading } = useBalance();
   const balance = data?.balance ?? 0;
+
+  useEffect(() => {
+    if (!isLoading && balance <= 0) {
+      const timer = setTimeout(() => {
+        incrementPlayerId();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [balance, isLoading]);
 
   const balanceFormatter = useCallback((n: number) => n.toFixed(2), []);
 
@@ -35,13 +44,13 @@ export const BalanceDisplay = ({ className }: Props) => {
           Balance
         </span>
         <div>
-          <span className="font-mono text-[16px] font-bold text-text-balance leading-[24px] mr-1">
+          <span className="font-mono text-sm md:text-base font-bold text-text-balance leading-[24px] mr-1">
             💰
           </span>
           <CountUp
             end={balance}
             formattingFn={balanceFormatter}
-            className="font-mono text-[16px] font-bold text-text-balance leading-[24px]"
+            className="font-mono text-sm md:text-base  font-bold text-text-balance leading-[24px]"
           />
         </div>
       </div>

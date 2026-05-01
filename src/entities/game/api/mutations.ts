@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { gameKeys } from '../model/queryKeys';
 import { CELL_TYPE, type Game, GAME_STATUS, type RevealRequest } from '../model/types';
 import { gameApi } from './gameApi';
-import { balanceKeys } from '@/entities/balance/model/queryKeys';
-import { historyKeys } from '@/entities/history/model/queryKeys';
+import { balanceKeys } from '@/entities/balance';
+import { historyKeys } from '@/entities/history';
 
 export const useCreateGame = () => {
   const queryClient = useQueryClient();

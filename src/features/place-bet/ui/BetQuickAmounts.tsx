@@ -1,6 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useBetStore } from '../model/useBetStore';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui';
 
 interface Props {
   disabled?: boolean;

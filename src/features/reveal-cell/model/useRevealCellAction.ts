@@ -1,8 +1,7 @@
-import { useRevealCell } from '@/entities/game/api/mutations';
-import { usePendingCellsStore } from './usePendingCellsStore';
+import { CELL_TYPE, useRevealCell } from '@/entities/game';
+import { usePendingCellsStore } from '../';
 import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
-import { CELL_TYPE } from '@/entities/game/model/types';
 
 export const useRevealCellAction = (gameId: string | null) => {
   const { setPending, clearPending } = usePendingCellsStore();

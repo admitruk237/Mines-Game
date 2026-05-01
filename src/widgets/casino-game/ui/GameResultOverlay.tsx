@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { type Game, GAME_STATUS } from '@/entities/game/model/types';
-import { useActiveGameStore } from '@/entities/game/model/useActiveGameStore';
-import { RESULT_OVERLAY_DELAY_MS } from '@/shared/config/animations';
+import { type Game, GAME_STATUS, useActiveGameStore } from '@/entities/game';
+import { RESULT_OVERLAY_DELAY_MS } from '@/shared/config';
 import { WinOverlay } from './WinOverlay';
 import { LossOverlay } from './LossOverlay';
 

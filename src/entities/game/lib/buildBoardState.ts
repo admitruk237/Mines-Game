@@ -1,4 +1,4 @@
-import { CellState } from '@/entities/cell';
+import { CELL_STATE, type CellState } from '@/entities/cell';
 import {
   CELL_TYPE,
   type CellPosition,
@@ -18,8 +18,8 @@ interface Params {
 }
 
 const CELL_TYPE_TO_STATE = {
-  [CELL_TYPE.GEM]: CellState.GEM,
-  [CELL_TYPE.MINE]: CellState.MINE,
+  [CELL_TYPE.GEM]: CELL_STATE.GEM,
+  [CELL_TYPE.MINE]: CELL_STATE.MINE,
 } as const;
 
 export const buildBoardState = ({
@@ -28,7 +28,7 @@ export const buildBoardState = ({
   hitCell,
   pendingCell,
 }: Params): CellState[][] => {
-  const initial = CellState.HIDDEN;
+  const initial = CELL_STATE.HIDDEN;
 
   const board: CellState[][] = Array.from({ length: GRID_SIZE }, () =>
     Array<CellState>(GRID_SIZE).fill(initial)
@@ -46,9 +46,9 @@ export const buildBoardState = ({
     board[row][col] = CELL_TYPE_TO_STATE[type];
   });
 
-  if (hitCell) board[hitCell.row][hitCell.col] = CellState.MINE_HIT;
+  if (hitCell) board[hitCell.row][hitCell.col] = CELL_STATE.MINE_HIT;
 
-  if (pendingCell) board[pendingCell.row][pendingCell.col] = CellState.LOADING;
+  if (pendingCell) board[pendingCell.row][pendingCell.col] = CELL_STATE.LOADING;
 
   return board;
 };

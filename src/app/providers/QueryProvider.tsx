@@ -1,6 +1,6 @@
-import { ReactNode, useState } from 'react';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { handleApiError } from '@/shared/api/handleApiError';
+import { type ReactNode, useState } from 'react';
 
 interface Props {
   children: ReactNode;

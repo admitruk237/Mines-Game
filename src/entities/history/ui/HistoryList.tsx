@@ -1,6 +1,6 @@
 import { useGameHistory } from '../api/queries';
 import { HistoryItem } from './HistoryItem';
-import { Skeleton } from '@/shared/ui/skeleton';
+import { Skeleton } from '@/shared/ui';
 
 export const HistoryList = () => {
   const { data, isLoading, isError } = useGameHistory();

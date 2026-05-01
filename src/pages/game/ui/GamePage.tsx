@@ -2,10 +2,9 @@ import { Header } from '@/widgets/header';
 import { CasinoGame } from '@/widgets/casino-game';
 import { ControlPanel } from '@/widgets/control-panel';
 import { GameHistory } from '@/widgets/game-history';
-import { useActiveGameStatus } from '@/entities/game/model/useActiveGameStatus';
-import { useGame } from '@/entities/game/api/queries';
-import { CashOutButton } from '@/features/cash-out/ui/CashOutButton';
-import { StartGameButton } from '@/features/start-game/ui/StartGameButton';
+import { useActiveGameStatus, useGame } from '@/entities/game';
+import { CashOutButton } from '@/features/cash-out';
+import { StartGameButton } from '@/features/start-game';
 
 export const GamePage = () => {
   const { isActive, gameId } = useActiveGameStatus();
@@ -16,8 +15,8 @@ export const GamePage = () => {
     <div className="h-screen bg-bg-main flex flex-col overflow-hidden relative">
       <Header />
 
-      <main className="flex-1 flex justify-center w-full min-h-0 pt-2 lg:pb-6 pb-24 px-4 lg:px-6 overflow-y-auto lg:overflow-y-hidden scrollbar-hide">
-        <div className="w-full max-w-[1440px] flex flex-col lg:flex-row gap-4 lg:gap-8 justify-between items-stretch h-auto lg:h-full">
+      <main className="flex-1 w-full min-h-0 overflow-y-auto lg:overflow-y-hidden scrollbar-hide lg:flex lg:items-center lg:justify-center">
+        <div className="w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-4 lg:gap-8 justify-between items-stretch h-auto lg:h-full pt-2 lg:pb-6 pb-20 px-4 lg:px-6">
           <div className="lg:order-3">
             <GameHistory />
           </div>
@@ -26,7 +25,7 @@ export const GamePage = () => {
             <ControlPanel />
           </div>
 
-          <div className="lg:order-2 flex-1 flex items-center justify-center min-w-0 py-8 lg:py-0">
+          <div className="lg:order-2 flex-1 flex items-center justify-center min-w-0 lg:py-0">
             <CasinoGame />
           </div>
         </div>

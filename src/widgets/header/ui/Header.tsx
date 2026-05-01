@@ -1,4 +1,4 @@
-import { SoundToggle } from '@/features/toggle-sound/ui/SoundToggle';
+import { SoundToggle } from '@/features/toggle-sound';
 
 export const Header = () => {
   return (

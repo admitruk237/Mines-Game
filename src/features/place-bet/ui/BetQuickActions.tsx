@@ -1,8 +1,8 @@
 import { useShallow } from 'zustand/react/shallow';
 import { useBetStore } from '../model/useBetStore';
-import { useBalance } from '@/entities/balance/api/queries';
-import { Button } from '@/shared/ui/button';
-import { roundToCents } from '@/shared/lib/roundToCents';
+import { useBalance } from '@/entities/balance';
+import { Button } from '@/shared/ui';
+import { roundToCents } from '@/shared/lib';
 
 interface Props {
   disabled?: boolean;

@@ -1,15 +1,14 @@
-import { useActiveGameStore } from '@/entities/game/model/useActiveGameStore';
-import { useGame } from '@/entities/game/api/queries';
+import { useActiveGameStore, useGame } from '@/entities/game';
 import { GameBoard } from './GameBoard';
 import { GameResultOverlay } from './GameResultOverlay';
-import { TOTAL_CELLS } from '@/shared/config/game';
+import { TOTAL_CELLS } from '@/shared/config';
 
 export const CasinoGame = () => {
   const gameId = useActiveGameStore((s) => s.gameId);
   const { data: game = null } = useGame(gameId);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full lg:min-h-[600px] py-4 lg:py-12">
+    <div className="flex flex-col items-center justify-center w-full lg:min-h-[600px] py-2 lg:py-12">
       <div className="w-full lg:max-w-[500px] relative">
         {game && (
           <div className="mb-4 text-center font-sans text-[12px] font-normal leading-[18px] text-text-status">

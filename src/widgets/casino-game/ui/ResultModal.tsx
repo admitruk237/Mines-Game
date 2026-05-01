@@ -1,7 +1,6 @@
-import { Dialog, DialogContent } from '@/shared/ui/dialog';
-import { cn } from '@/shared/lib/utils';
+import { Card, Dialog, DialogContent } from '@/shared/ui';
+import { cn } from '@/shared/lib';
 import type { ReactNode } from 'react';
-import { Card } from '@/shared/ui/card';
 
 interface Props {
   onReset: () => void;

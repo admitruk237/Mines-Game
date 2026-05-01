@@ -1,5 +1,5 @@
 import { useBetStore } from './useBetStore';
-import { useBalance } from '@/entities/balance/api/queries';
+import { useBalance } from '@/entities/balance';
 import { validateBet } from './validateBet';
 
 export const useBetStatus = () => {

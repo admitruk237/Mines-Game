@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
 import { QueryProvider } from './providers/QueryProvider';
-import { Toaster } from '@/shared/ui/sonner';
+import { Toaster } from '@/shared/ui';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

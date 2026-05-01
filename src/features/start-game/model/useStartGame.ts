@@ -1,5 +1,4 @@
-import { useCreateGame } from '@/entities/game/api/mutations';
-import { useActiveGameStore } from '@/entities/game/model/useActiveGameStore';
+import { useActiveGameStore, useCreateGame } from '@/entities/game';
 
 import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';

@@ -1,9 +1,7 @@
-import type { Game } from '@/entities/game/model/types';
-import { StatRow } from '@/shared/ui/StatRow';
-import { formatCurrency } from '@/shared/lib/formatCurrency';
-import { TOTAL_CELLS } from '@/shared/config/game';
-
-import { cn } from '@/shared/lib/utils';
+import { type Game } from '@/entities/game';
+import { StatRow } from '@/shared/ui';
+import { cn, formatCurrency } from '@/shared/lib';
+import { TOTAL_CELLS } from '@/shared/config';
 
 interface Props {
   game: Game;

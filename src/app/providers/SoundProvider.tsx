@@ -1,7 +1,5 @@
-import { SoundContextProvider } from '@/shared/lib/contexts/SoundContext';
-import { useSoundStore } from '@/features/toggle-sound/model/useSoundStore';
-import { GAME_SOUNDS } from '@/shared/lib/constants/sounds';
-import { useSounds } from '@/shared/lib/hooks/useSounds';
+import { GAME_SOUNDS, SoundContextProvider, useSounds } from '@/shared/lib';
+import { useSoundStore } from '@/features/toggle-sound';
 import type { ReactNode } from 'react';
 
 interface Props {
