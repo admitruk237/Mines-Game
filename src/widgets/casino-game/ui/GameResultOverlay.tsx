@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { type Game, GAME_STATUS, useActiveGameStore } from '@/entities/game';
+import { type Game, GAME_STATUS, useResetGame } from '@/entities/game';
 import { RESULT_OVERLAY_DELAY_MS } from '@/shared/config';
 import { WinOverlay } from './WinOverlay';
 import { LossOverlay } from './LossOverlay';
@@ -11,10 +11,15 @@ interface Props {
 
 export const GameResultOverlay = ({ game, isRevealComplete }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
-  const resetGame = useActiveGameStore((s) => s.resetGame);
+  const [prevIsRevealComplete, setPrevIsRevealComplete] = useState(isRevealComplete);
+  const resetGame = useResetGame();
 
-  if (!isRevealComplete && isVisible) {
-    setIsVisible(false);
+  // Adjust state during render when props change (Official React Pattern)
+  if (isRevealComplete !== prevIsRevealComplete) {
+    setPrevIsRevealComplete(isRevealComplete);
+    if (!isRevealComplete) {
+      setIsVisible(false);
+    }
   }
 
   useEffect(() => {

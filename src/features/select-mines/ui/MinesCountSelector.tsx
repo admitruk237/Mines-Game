@@ -1,4 +1,4 @@
-import { useMinesStore } from '../model/useMinesStore';
+import { useMinesState } from '../model/useMinesStore';
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui';
 import { TOTAL_CELLS } from '@/shared/config';
 
@@ -9,8 +9,7 @@ interface Props {
 }
 
 export const MinesCountSelector = ({ disabled }: Props) => {
-  const minesCount = useMinesStore((s) => s.minesCount);
-  const setMinesCount = useMinesStore((s) => s.setMinesCount);
+  const { minesCount, setMinesCount } = useMinesState();
 
   const handleValueChange = (values: string[]) => {
     if (values.length > 0) {

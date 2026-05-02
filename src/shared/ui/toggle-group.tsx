@@ -5,7 +5,7 @@ import { type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/shared/lib/utils';
 import { toggleVariants } from '@/shared/ui/toggle';
-import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 interface ToggleGroupContextValue {
@@ -61,10 +61,8 @@ function ToggleGroupItem({
   ...props
 }: ToggleGroupItemProps) {
   const context = useContext(ToggleGroupContext);
-  const soundContext = useSoundContext();
-
   const handleClick = (e: Parameters<NonNullable<BaseToggle.Props['onClick']>>[0]) => {
-    soundContext?.playSound(SOUND_KEYS.CLICK);
+    soundManager.play(SOUND_KEYS.CLICK);
     onClick?.(e);
   };
 

@@ -1,9 +1,9 @@
-import { useBetStore } from './useBetStore';
+import { useBetAmount } from './useBetStore';
 import { useBalance } from '@/entities/balance';
 import { validateBet } from './validateBet';
 
 export const useBetStatus = () => {
-  const betAmount = useBetStore((s) => s.betAmount);
+  const betAmount = useBetAmount();
 
   const { data } = useBalance();
   const balance = data?.balance ?? 0;

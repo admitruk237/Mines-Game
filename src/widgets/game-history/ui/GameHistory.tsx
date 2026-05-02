@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Card } from '@/shared/ui/card';
 import { HistoryList } from '@/entities/history';
 
-export const GameHistory = () => {
+export const GameHistory = memo(() => {
   return (
     <Card
       variant="panel"
@@ -18,4 +19,6 @@ export const GameHistory = () => {
       </div>
     </Card>
   );
-};
+});
+
+GameHistory.displayName = 'GameHistory';

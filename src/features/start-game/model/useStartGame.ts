@@ -1,19 +1,17 @@
-import { useActiveGameStore, useCreateGame } from '@/entities/game';
-
-import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
+import { useCreateGame, useSetGameId } from '@/entities/game';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 export const useStartGame = () => {
-  const { setGameId } = useActiveGameStore();
+  const setGameId = useSetGameId();
   const createGameMutation = useCreateGame();
-  const { playSound } = useSoundContext();
 
   const startGame = (betAmount: number, minesCount: number) => {
     createGameMutation.mutate(
       { betAmount, minesCount },
       {
         onSuccess: (data) => {
-          playSound(SOUND_KEYS.BET);
+          soundManager.play(SOUND_KEYS.BET);
           setGameId(data.gameId);
         },
       }

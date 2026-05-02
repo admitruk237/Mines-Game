@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useActiveGameStore } from './useActiveGameStore';
+import { useSetGameId } from './useActiveGameStore';
 import { gameKeys } from './queryKeys';
 import { gameApi } from '../api/gameApi';
 
 export const useRestoreSession = () => {
-  const setGameId = useActiveGameStore((s) => s.setGameId);
+  const setGameId = useSetGameId();
   const queryClient = useQueryClient();
 
   const query = useQuery({

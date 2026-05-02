@@ -7,11 +7,27 @@ import { CashOutButton } from '@/features/cash-out';
 import { Card } from '@/shared/ui/card';
 import { InfoStats } from './InfoStats';
 
+interface ActiveGamePanelProps {
+  gameId: string;
+}
+
+const ActiveGamePanel = ({ gameId }: ActiveGamePanelProps) => {
+  const { data: game = null } = useGame(gameId);
+  if (!game) return null;
+  return (
+    <>
+      <div className="hidden lg:block pt-2">
+        <CashOutButton gameId={gameId} initialData={game} />
+      </div>
+      <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+        <InfoStats game={game} />
+      </div>
+    </>
+  );
+};
+
 export const ControlPanel = () => {
   const { isActive, gameId } = useActiveGameStatus();
-  const { data: game = null } = useGame(gameId);
-
-  const showStats = isActive && game;
 
   return (
     <Card
@@ -28,15 +44,13 @@ export const ControlPanel = () => {
           <BetQuickActions disabled={isActive} />
         </div>
         <MinesCountSelector disabled={isActive} />
-        <div className="hidden lg:block pt-2">
-          {showStats ? <CashOutButton game={game} /> : <StartGameButton />}
-        </div>
+        {!isActive && (
+          <div className="hidden lg:block pt-2">
+            <StartGameButton />
+          </div>
+        )}
         <div className="flex flex-col">
-          {showStats && (
-            <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
-              <InfoStats game={game} />
-            </div>
-          )}
+          {isActive && gameId && <ActiveGamePanel gameId={gameId} />}
           <div className="hidden lg:block pt-4 border-t border-white/5 mt-4">
             <BalanceDisplay />
           </div>

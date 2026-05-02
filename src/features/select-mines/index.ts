@@ -1,2 +1,2 @@
 export { MinesCountSelector } from './ui/MinesCountSelector';
-export { useMinesStore } from './model/useMinesStore';
+export { useMinesStore, useMinesCount, useMinesState } from './model/useMinesStore';

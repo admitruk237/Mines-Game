@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 
 interface BetState {
   betAmount: number;
@@ -15,3 +16,8 @@ export const useBetStore = create<BetState>()(
     { name: 'mines-bet-storage' }
   )
 );
+
+export const useBetAmount = () => useBetStore((s) => s.betAmount);
+export const useSetBetAmount = () => useBetStore((s) => s.setBetAmount);
+export const useBetState = () =>
+  useBetStore(useShallow((s) => ({ betAmount: s.betAmount, setBetAmount: s.setBetAmount })));

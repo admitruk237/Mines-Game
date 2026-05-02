@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useStartGame } from '../';
-import { useBetStatus, useBetStore } from '@/features/place-bet';
-import { useMinesStore } from '@/features/select-mines';
+import { useBetAmount, useBetStatus } from '@/features/place-bet';
+import { useMinesCount } from '@/features/select-mines';
 import { Button, LoadingOverlay } from '@/shared/ui';
 import { MIN_LOADER_DISPLAY_MS } from '@/shared/config';
 
 export const StartGameButton = () => {
-  const betAmount = useBetStore((s) => s.betAmount);
-  const minesCount = useMinesStore((s) => s.minesCount);
+  const betAmount = useBetAmount();
+  const minesCount = useMinesCount();
 
   const { startGame, isPending } = useStartGame();
   const { isValid } = useBetStatus();

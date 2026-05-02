@@ -1,5 +1,4 @@
-import { useShallow } from 'zustand/react/shallow';
-import { useBetStore } from '../model/useBetStore';
+import { useBetState } from '../model/useBetStore';
 import { useBalance } from '@/entities/balance';
 import { Button } from '@/shared/ui';
 import { roundToCents } from '@/shared/lib';
@@ -9,12 +8,7 @@ interface Props {
 }
 
 export const BetQuickActions = ({ disabled }: Props) => {
-  const { betAmount, setBetAmount } = useBetStore(
-    useShallow((s) => ({
-      betAmount: s.betAmount,
-      setBetAmount: s.setBetAmount,
-    }))
-  );
+  const { betAmount, setBetAmount } = useBetState();
 
   const { data } = useBalance();
   const balance = data?.balance ?? 0;

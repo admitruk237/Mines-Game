@@ -1,5 +1,4 @@
-import { useShallow } from 'zustand/react/shallow';
-import { useBetStore } from '../model/useBetStore';
+import { useSetBetAmount } from '../model/useBetStore';
 import { Button } from '@/shared/ui';
 import { QUICK_BET_AMOUNTS } from '@/shared/config';
 
@@ -8,11 +7,7 @@ interface Props {
 }
 
 export const BetQuickAmounts = ({ disabled }: Props) => {
-  const { setBetAmount } = useBetStore(
-    useShallow((s) => ({
-      setBetAmount: s.setBetAmount,
-    }))
-  );
+  const setBetAmount = useSetBetAmount();
 
   return (
     <div className="grid grid-cols-4 gap-2 w-full lg:hidden">

@@ -1,2 +1,7 @@
 export { useRevealCellAction } from './model/useRevealCellAction';
-export { usePendingCellsStore } from './model/usePendingCellsStore';
+export {
+  usePendingCellsStore,
+  usePendingCell,
+  useSetPending,
+  useClearPending,
+} from './model/usePendingCellsStore';

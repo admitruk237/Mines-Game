@@ -1,8 +1,9 @@
 import { Volume2, VolumeX } from 'lucide-react';
-import { useSoundStore } from '../model/useSoundStore';
+import { useIsMuted, useToggleMute } from '../model/useSoundStore';
 
 export const SoundToggle = () => {
-  const { isMuted, toggleMute } = useSoundStore();
+  const isMuted = useIsMuted();
+  const toggleMute = useToggleMute();
 
   return (
     <button

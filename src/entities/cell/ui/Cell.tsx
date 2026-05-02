@@ -1,12 +1,13 @@
+import { memo, type ReactNode } from 'react';
+
 import { cva } from 'class-variance-authority';
 import { Loader2 } from 'lucide-react';
 import { CELL_STATE, type CellState } from '../model/types';
 import { CELL_TYPE } from '@/entities/game';
 import { CellIcon } from './CellIcon';
 import { cn } from '@/shared/lib/utils';
-import { useSoundContext } from '@/shared/lib/contexts/SoundContext';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
-import type { ReactNode } from 'react';
 
 const cellVariants = cva(
   'aspect-square flex items-center justify-center rounded-[14px] transition-all select-none w-full border border-solid duration-75',
@@ -19,8 +20,7 @@ const cellVariants = cva(
         [CELL_STATE.MINE]: 'bg-cell-mine-bg border-cell-mine-border opacity-40',
         [CELL_STATE.MINE_HIT]:
           'bg-cell-mine-bg border-text-loss animate-in zoom-in duration-300 ring-2 ring-lose-glow',
-        [CELL_STATE.INACTIVE]:
-          'bg-cell-bg border-cell-border cursor-not-allowed',
+        [CELL_STATE.INACTIVE]: 'bg-cell-bg border-cell-border cursor-not-allowed',
         [CELL_STATE.LOADING]: 'bg-cell-bg border-cell-border animate-pulse cursor-wait',
       },
     },
@@ -38,18 +38,19 @@ const CLICKABLE_STATES: CellState[] = [CELL_STATE.HIDDEN];
 
 interface Props {
   state: CellState;
-  onClick?: () => void;
+  row: number;
+  col: number;
+  onReveal: (row: number, col: number) => void;
   ariaLabel: string;
 }
 
-export const Cell = ({ state, onClick, ariaLabel }: Props) => {
+export const Cell = memo(({ state, row, col, onReveal, ariaLabel }: Props) => {
   const isClickable = CLICKABLE_STATES.includes(state);
-  const { playSound } = useSoundContext();
 
   const handleClick = () => {
     if (isClickable) {
-      playSound(SOUND_KEYS.CLICK);
-      onClick?.();
+      soundManager.play(SOUND_KEYS.CLICK);
+      onReveal(row, col);
     }
   };
 
@@ -64,4 +65,6 @@ export const Cell = ({ state, onClick, ariaLabel }: Props) => {
       {ICON_BY_STATE[state] ?? null}
     </button>
   );
-};
+});
+
+Cell.displayName = 'Cell';

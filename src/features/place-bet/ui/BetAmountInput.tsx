@@ -1,6 +1,5 @@
 import { type ChangeEvent } from 'react';
-import { useShallow } from 'zustand/react/shallow';
-import { useBetStore } from '../model/useBetStore';
+import { useBetState } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
 import { Input } from '@/shared/ui';
 
@@ -9,12 +8,7 @@ interface Props {
 }
 
 export const BetAmountInput = ({ disabled }: Props) => {
-  const { betAmount, setBetAmount } = useBetStore(
-    useShallow((s) => ({
-      betAmount: s.betAmount,
-      setBetAmount: s.setBetAmount,
-    }))
-  );
+  const { betAmount, setBetAmount } = useBetState();
 
   const { error, isValid } = useBetStatus();
   const hasError = !isValid && betAmount > 0;

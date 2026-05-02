@@ -5,8 +5,6 @@ export const CountUp = (props: CountUpProps) => {
   const countUpRef = useRef<HTMLElement>(null);
 
   const { update } = useCountUp({
-    // react-countup types ref as RefObject<HTMLElement> (non-null), but it
-    // safely handles null at runtime — narrow the type without `unknown`.
     ref: countUpRef as RefObject<HTMLElement>,
     start: props.start,
     end: props.end,

@@ -2,14 +2,12 @@ import { Header } from '@/widgets/header';
 import { CasinoGame } from '@/widgets/casino-game';
 import { ControlPanel } from '@/widgets/control-panel';
 import { GameHistory } from '@/widgets/game-history';
-import { useActiveGameStatus, useGame } from '@/entities/game';
+import { useActiveGameStatus } from '@/entities/game';
 import { CashOutButton } from '@/features/cash-out';
 import { StartGameButton } from '@/features/start-game';
 
 export const GamePage = () => {
   const { isActive, gameId } = useActiveGameStatus();
-  const { data: game = null } = useGame(gameId);
-  const showStats = isActive && game;
 
   return (
     <div className="h-screen bg-bg-main flex flex-col overflow-hidden relative">
@@ -33,7 +31,7 @@ export const GamePage = () => {
 
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
         <div className="max-w-[1440px] mx-auto px-4 pb-4 pointer-events-auto">
-          {showStats ? <CashOutButton game={game} /> : <StartGameButton />}
+          {isActive && gameId ? <CashOutButton gameId={gameId} /> : <StartGameButton />}
         </div>
       </div>
     </div>

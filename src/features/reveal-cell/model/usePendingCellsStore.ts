@@ -11,3 +11,7 @@ export const usePendingCellsStore = create<PendingCellsState>((set) => ({
   setPending: (row, col) => set({ pendingCell: { row, col } }),
   clearPending: () => set({ pendingCell: null }),
 }));
+
+export const usePendingCell = () => usePendingCellsStore((s) => s.pendingCell);
+export const useSetPending = () => usePendingCellsStore((s) => s.setPending);
+export const useClearPending = () => usePendingCellsStore((s) => s.clearPending);
