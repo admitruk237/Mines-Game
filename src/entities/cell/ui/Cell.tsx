@@ -20,7 +20,7 @@ const cellVariants = cva(
         [CELL_STATE.MINE_HIT]:
           'bg-cell-mine-bg border-text-loss animate-in zoom-in duration-300 ring-2 ring-lose-glow',
         [CELL_STATE.INACTIVE]:
-          'bg-cell-bg/40 border-cell-border/40 cursor-not-allowed grayscale opacity-50',
+          'bg-cell-bg border-cell-border cursor-not-allowed',
         [CELL_STATE.LOADING]: 'bg-cell-bg border-cell-border animate-pulse cursor-wait',
       },
     },

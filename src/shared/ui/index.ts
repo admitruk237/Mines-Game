@@ -6,7 +6,6 @@ export * from './skeleton';
 export * from './sonner';
 export * from './toggle';
 export * from './toggle-group';
-export * from './tooltip';
 export * from './LoadingOverlay';
 export * from './StatRow';
 export * from './CountUp';

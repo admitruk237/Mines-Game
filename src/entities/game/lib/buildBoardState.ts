@@ -3,6 +3,7 @@ import {
   CELL_TYPE,
   type CellPosition,
   type FullBoard,
+  GAME_STATUS,
   type GameStatus,
   type RevealedCell,
 } from '../model/types';
@@ -23,12 +24,14 @@ const CELL_TYPE_TO_STATE = {
 } as const;
 
 export const buildBoardState = ({
+  status,
   revealedCells,
   fullBoard,
   hitCell,
   pendingCell,
 }: Params): CellState[][] => {
-  const initial = CELL_STATE.HIDDEN;
+  const initial: CellState =
+    status === GAME_STATUS.ACTIVE ? CELL_STATE.HIDDEN : CELL_STATE.INACTIVE;
 
   const board: CellState[][] = Array.from({ length: GRID_SIZE }, () =>
     Array<CellState>(GRID_SIZE).fill(initial)
