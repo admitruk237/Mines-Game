@@ -17,7 +17,7 @@ const ActiveGamePanel = ({ gameId }: ActiveGamePanelProps) => {
   return (
     <>
       <div className="hidden lg:block pt-2">
-        <CashOutButton gameId={gameId} initialData={game} />
+        <CashOutButton gameId={gameId} />
       </div>
       <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
         <InfoStats game={game} />

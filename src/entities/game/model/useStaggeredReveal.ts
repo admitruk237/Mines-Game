@@ -72,7 +72,10 @@ export const useStaggeredReveal = (game: Game | null) => {
   if (hasFullBoard) {
     if (animState.order.length > 0) {
       for (let i = animState.revealIndex; i < animState.order.length; i++) {
-        hiddenSet.add(animState.order[i]);
+        const item = animState.order[i];
+        if (item !== undefined) {
+          hiddenSet.add(item);
+        }
       }
     } else {
       const currentRevealed = new Set(

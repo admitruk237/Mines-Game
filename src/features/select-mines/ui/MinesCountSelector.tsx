@@ -12,8 +12,9 @@ export const MinesCountSelector = ({ disabled }: Props) => {
   const { minesCount, setMinesCount } = useMinesState();
 
   const handleValueChange = (values: string[]) => {
-    if (values.length > 0) {
-      setMinesCount(parseInt(values[0], 10));
+    const firstValue = values[0];
+    if (firstValue !== undefined) {
+      setMinesCount(parseInt(firstValue, 10));
     }
   };
 

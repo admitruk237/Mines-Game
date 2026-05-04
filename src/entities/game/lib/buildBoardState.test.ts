@@ -39,7 +39,7 @@ describe('buildBoardState', () => {
         status: GAME_STATUS.ACTIVE,
         revealedCells: [{ row: 1, col: 2, type: CELL_TYPE.GEM }],
       });
-      expect(board[1][2]).toBe(CELL_STATE.GEM);
+      expect(board[1]![2]).toBe(CELL_STATE.GEM);
     });
 
     it('marks mine at correct coordinates', () => {
@@ -47,7 +47,7 @@ describe('buildBoardState', () => {
         status: GAME_STATUS.ACTIVE,
         revealedCells: [{ row: 3, col: 4, type: CELL_TYPE.MINE }],
       });
-      expect(board[3][4]).toBe(CELL_STATE.MINE);
+      expect(board[3]![4]).toBe(CELL_STATE.MINE);
     });
 
     it('does not affect other cells', () => {
@@ -55,8 +55,8 @@ describe('buildBoardState', () => {
         status: GAME_STATUS.ACTIVE,
         revealedCells: [{ row: 0, col: 0, type: CELL_TYPE.GEM }],
       });
-      expect(board[0][1]).toBe(CELL_STATE.HIDDEN);
-      expect(board[4][4]).toBe(CELL_STATE.HIDDEN);
+      expect(board[0]![1]).toBe(CELL_STATE.HIDDEN);
+      expect(board[4]![4]).toBe(CELL_STATE.HIDDEN);
     });
 
     it('handles multiple revealed cells', () => {
@@ -68,10 +68,10 @@ describe('buildBoardState', () => {
           { row: 4, col: 4, type: CELL_TYPE.GEM },
         ],
       });
-      expect(board[0][0]).toBe(CELL_STATE.GEM);
-      expect(board[2][2]).toBe(CELL_STATE.GEM);
-      expect(board[4][4]).toBe(CELL_STATE.GEM);
-      expect(board[1][1]).toBe(CELL_STATE.HIDDEN);
+      expect(board[0]![0]).toBe(CELL_STATE.GEM);
+      expect(board[2]![2]).toBe(CELL_STATE.GEM);
+      expect(board[4]![4]).toBe(CELL_STATE.GEM);
+      expect(board[1]![1]).toBe(CELL_STATE.HIDDEN);
     });
   });
 
@@ -85,9 +85,9 @@ describe('buildBoardState', () => {
         [G, G, G, G, M],
       ];
       const board = buildBoardState({ status: GAME_STATUS.LOST, revealedCells: [], fullBoard });
-      expect(board[0][2]).toBe(CELL_STATE.MINE);
-      expect(board[0][0]).toBe(CELL_STATE.GEM);
-      expect(board[4][4]).toBe(CELL_STATE.MINE);
+      expect(board[0]![2]).toBe(CELL_STATE.MINE);
+      expect(board[0]![0]).toBe(CELL_STATE.GEM);
+      expect(board[4]![4]).toBe(CELL_STATE.MINE);
     });
 
     it('ignores revealedCells when fullBoard is present', () => {
@@ -103,7 +103,7 @@ describe('buildBoardState', () => {
         revealedCells: [{ row: 0, col: 0, type: CELL_TYPE.GEM }],
         fullBoard,
       });
-      expect(board[0][0]).toBe(CELL_STATE.MINE);
+      expect(board[0]![0]).toBe(CELL_STATE.MINE);
     });
   });
 
@@ -115,7 +115,7 @@ describe('buildBoardState', () => {
         fullBoard: allGemsBoard,
         hitCell: { row: 2, col: 3 },
       });
-      expect(board[2][3]).toBe(CELL_STATE.MINE_HIT);
+      expect(board[2]![3]).toBe(CELL_STATE.MINE_HIT);
     });
 
     it('does not affect other cells', () => {
@@ -125,8 +125,8 @@ describe('buildBoardState', () => {
         fullBoard: allGemsBoard,
         hitCell: { row: 0, col: 0 },
       });
-      expect(board[0][1]).toBe(CELL_STATE.GEM);
-      expect(board[4][4]).toBe(CELL_STATE.GEM);
+      expect(board[0]![1]).toBe(CELL_STATE.GEM);
+      expect(board[4]![4]).toBe(CELL_STATE.GEM);
     });
   });
 
@@ -137,7 +137,7 @@ describe('buildBoardState', () => {
         revealedCells: [],
         pendingCell: { row: 1, col: 1 },
       });
-      expect(board[1][1]).toBe(CELL_STATE.LOADING);
+      expect(board[1]![1]).toBe(CELL_STATE.LOADING);
     });
 
     it('does not affect surrounding cells', () => {
@@ -146,8 +146,8 @@ describe('buildBoardState', () => {
         revealedCells: [],
         pendingCell: { row: 3, col: 3 },
       });
-      expect(board[3][3]).toBe(CELL_STATE.LOADING);
-      expect(board[3][2]).toBe(CELL_STATE.HIDDEN);
+      expect(board[3]![3]).toBe(CELL_STATE.LOADING);
+      expect(board[3]![2]).toBe(CELL_STATE.HIDDEN);
     });
   });
 });

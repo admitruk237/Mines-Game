@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { type Game, GAME_STATUS, useResetGame } from '@/entities/game';
 import { RESULT_OVERLAY_DELAY_MS } from '@/shared/config';
-import { GameModal } from '@/shared/ui';
 import { WinOverlay } from './WinOverlay';
 import { LossOverlay } from './LossOverlay';
 

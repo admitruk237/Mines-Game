@@ -1,5 +1,5 @@
 import { useCashOut } from '../model/useCashOut';
-import { type Game, useGame } from '@/entities/game';
+import { useGame } from '@/entities/game';
 import { Button } from '@/shared/ui';
 import { Loader2 } from 'lucide-react';
 import { formatCurrency, mulCents } from '@/shared/lib';
@@ -8,11 +8,10 @@ import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 interface Props {
   gameId: string;
-  initialData?: Game | null;
 }
 
-export const CashOutButton = ({ gameId, initialData = null }: Props) => {
-  const { data: game = initialData } = useGame(gameId);
+export const CashOutButton = ({ gameId }: Props) => {
+  const { data: game } = useGame(gameId);
   const { cashOut, isPending } = useCashOut(gameId);
 
   if (!game) return null;

@@ -25,7 +25,7 @@ export const incrementPlayerId = () => {
   const match = currentId.match(/(.+)-(\d+)$/);
 
   let nextId;
-  if (match) {
+  if (match && match[1] !== undefined && match[2] !== undefined) {
     const base = match[1];
     const counter = parseInt(match[2], 10);
     nextId = `${base}-${counter + 1}`;

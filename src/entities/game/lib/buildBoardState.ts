@@ -40,18 +40,26 @@ export const buildBoardState = ({
   if (fullBoard) {
     fullBoard.forEach((row, r) =>
       row.forEach((type, c) => {
-        board[r][c] = CELL_TYPE_TO_STATE[type];
+        const boardRow = board[r];
+        if (boardRow) boardRow[c] = CELL_TYPE_TO_STATE[type];
       })
     );
   } else {
     revealedCells.forEach(({ row, col, type }) => {
-      board[row][col] = CELL_TYPE_TO_STATE[type];
+      const boardRow = board[row];
+      if (boardRow) boardRow[col] = CELL_TYPE_TO_STATE[type];
     });
   }
 
-  if (hitCell) board[hitCell.row][hitCell.col] = CELL_STATE.MINE_HIT;
+  if (hitCell) {
+    const boardRow = board[hitCell.row];
+    if (boardRow) boardRow[hitCell.col] = CELL_STATE.MINE_HIT;
+  }
 
-  if (pendingCell) board[pendingCell.row][pendingCell.col] = CELL_STATE.LOADING;
+  if (pendingCell) {
+    const boardRow = board[pendingCell.row];
+    if (boardRow) boardRow[pendingCell.col] = CELL_STATE.LOADING;
+  }
 
   return board;
 };
