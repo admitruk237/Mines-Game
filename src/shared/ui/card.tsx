@@ -11,6 +11,7 @@ const CARD_VARIANTS = cva(
         panel: 'bg-panel-bg border border-history-border p-6 rounded-[14px]',
         win: 'bg-panel-bg border-2 border-text-win shadow-[0_0_50px_0_var(--color-win-glow)]',
         loss: 'bg-panel-bg border-2 border-text-loss shadow-[0_0_50px_0_var(--color-lose-glow)]',
+        info: 'bg-panel-bg border-2 border-text-info shadow-[0_0_50px_0_var(--color-info-glow)]',
       },
     },
     defaultVariants: {

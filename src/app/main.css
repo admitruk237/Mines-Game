@@ -50,11 +50,13 @@
   --color-text-loss: #ef4444;
   --color-text-balance: #fbbf24;
   --color-skeleton-bg: #1a1f2e;
+  --color-text-info: #a855f7;
   --color-text-status: #4a5568;
 
   /* Glow effects */
   --color-win-glow: rgba(34, 197, 94, 0.4);
   --color-lose-glow: rgba(239, 68, 68, 0.4);
+  --color-info-glow: rgba(168, 85, 247, 0.4);
 }
 
 @layer utilities {

@@ -1,4 +1,4 @@
-import { type ChangeEvent } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { useBetState } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
 import { Input } from '@/shared/ui';
@@ -9,18 +9,28 @@ interface Props {
 
 export const BetAmountInput = ({ disabled }: Props) => {
   const { betAmount, setBetAmount } = useBetState();
+  const [raw, setRaw] = useState(String(betAmount));
+  const [prevBetAmount, setPrevBetAmount] = useState(betAmount);
+
+  if (betAmount !== prevBetAmount) {
+    setPrevBetAmount(betAmount);
+    setRaw(String(betAmount));
+  }
 
   const { error, isValid } = useBetStatus();
-  const hasError = !isValid && betAmount > 0;
+  const hasError = !isValid && (betAmount > 0 || raw !== '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === '') {
+    const nextRaw = e.target.value;
+    setRaw(nextRaw);
+
+    if (nextRaw === '') {
       setBetAmount(0);
       return;
     }
 
-    const value = parseFloat(e.target.value);
-    if (!isNaN(value)) {
+    const value = parseFloat(nextRaw);
+    if (Number.isFinite(value)) {
       setBetAmount(value);
     }
   };
@@ -45,7 +55,7 @@ export const BetAmountInput = ({ disabled }: Props) => {
         <Input
           id="bet-amount"
           type="number"
-          value={betAmount || ''}
+          value={raw}
           onChange={handleChange}
           aria-invalid={hasError}
           disabled={disabled}

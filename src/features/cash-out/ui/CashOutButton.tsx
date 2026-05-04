@@ -2,7 +2,9 @@ import { useCashOut } from '../model/useCashOut';
 import { type Game, useGame } from '@/entities/game';
 import { Button } from '@/shared/ui';
 import { Loader2 } from 'lucide-react';
-import { formatCurrency } from '@/shared/lib';
+import { formatCurrency, mulCents } from '@/shared/lib';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
+import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 interface Props {
   gameId: string;
@@ -16,13 +18,18 @@ export const CashOutButton = ({ gameId, initialData = null }: Props) => {
   if (!game) return null;
 
   const canCashOut = (game.gemsFound ?? 0) > 0;
-  const winAmount = game.betAmount * game.currentMultiplier;
+  const winAmount = mulCents(game.betAmount, game.currentMultiplier);
+
+  const handleCashOut = () => {
+    soundManager.play(SOUND_KEYS.CLICK);
+    cashOut();
+  };
 
   return (
     <Button
       variant="primary-blue"
       size="play"
-      onClick={() => cashOut()}
+      onClick={handleCashOut}
       disabled={isPending || !canCashOut}
       className="w-full"
     >

@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
 
 export const useMinimumLoading = (isPending: boolean, minTime: number = 800) => {
-  const [show, setShow] = useState(isPending);
+  const [show, setShow] = useState(false);
+  const [prevIsPending, setPrevIsPending] = useState(isPending);
+
+  if (isPending !== prevIsPending) {
+    setPrevIsPending(isPending);
+    if (isPending) {
+      setShow(true);
+    }
+  }
 
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
+    if (isPending) return;
 
-    if (isPending) {
-      timer = setTimeout(() => setShow(true), 0);
-    } else {
-      timer = setTimeout(() => {
-        setShow(false);
-      }, minTime);
-    }
+    const timer = setTimeout(() => {
+      setShow(false);
+    }, minTime);
 
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, [isPending, minTime]);
 
-  return isPending || show;
+  return show;
 };

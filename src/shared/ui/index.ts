@@ -3,6 +3,7 @@ export * from './card';
 export * from './dialog';
 export * from './input';
 export * from './skeleton';
+export * from './GameModal';
 export * from './sonner';
 export * from './toggle';
 export * from './toggle-group';

@@ -3,15 +3,24 @@ import { cn } from '@/shared/lib';
 import type { ReactNode } from 'react';
 
 interface Props {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   onReset: () => void;
-  height: string;
-  variant: 'win' | 'loss';
+  height?: string;
+  variant: 'win' | 'loss' | 'info';
   children: ReactNode;
 }
 
-export const ResultModal = ({ onReset, height, variant, children }: Props) => {
+export const GameModal = ({
+  open = true,
+  onOpenChange,
+  onReset,
+  height,
+  variant,
+  children,
+}: Props) => {
   return (
-    <Dialog open onOpenChange={(open) => !open && onReset()}>
+    <Dialog open={open} onOpenChange={onOpenChange || ((open) => !open && onReset())}>
       <DialogContent className="p-0 bg-transparent border-none shadow-none w-[92vw] max-w-[384px] overflow-visible">
         <Card
           variant={variant}

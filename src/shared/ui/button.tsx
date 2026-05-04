@@ -1,8 +1,6 @@
 import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { soundManager } from '@/shared/lib/sounds/soundManager';
-import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
@@ -54,17 +52,11 @@ const buttonVariants = cva(
 
 interface Props extends ButtonPrimitive.Props, VariantProps<typeof buttonVariants> {}
 
-function Button({ className, variant = 'default', size = 'default', onClick, ...props }: Props) {
-  const handleClick = (e: Parameters<NonNullable<ButtonPrimitive.Props['onClick']>>[0]) => {
-    soundManager.play(SOUND_KEYS.CLICK);
-    onClick?.(e);
-  };
-
+function Button({ className, variant = 'default', size = 'default', ...props }: Props) {
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      onClick={handleClick}
       {...props}
     />
   );

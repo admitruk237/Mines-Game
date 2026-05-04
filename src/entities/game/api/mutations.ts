@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { gameKeys } from '../model/queryKeys';
-import { CELL_TYPE, type Game, GAME_STATUS, type RevealRequest } from '../model/types';
+import { CELL_TYPE, type Game, type RevealRequest } from '../model/types';
 import { gameApi } from './gameApi';
-import { balanceKeys } from '@/entities/balance';
-import { historyKeys } from '@/entities/history';
 
 export const useCreateGame = () => {
   const queryClient = useQueryClient();
@@ -12,10 +10,6 @@ export const useCreateGame = () => {
     mutationFn: gameApi.create,
     onSuccess: (newGame) => {
       queryClient.setQueryData(gameKeys.detail(newGame.gameId), newGame);
-
-      if (newGame.balance !== undefined) {
-        queryClient.setQueryData(balanceKeys.all, { balance: newGame.balance });
-      }
     },
   });
 };
@@ -54,13 +48,6 @@ export const useRevealCell = (gameId: string | null) => {
           profit: -oldGame.betAmount,
         };
       });
-
-      if (response.status === GAME_STATUS.LOST) {
-        if (response.balance !== undefined) {
-          queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
-        }
-        queryClient.invalidateQueries({ queryKey: historyKeys.all });
-      }
     },
   });
 };
@@ -87,11 +74,6 @@ export const useCashOut = (gameId: string | null) => {
           cashedOutMultiplier: response.cashedOutMultiplier,
         };
       });
-
-      if (response.balance !== undefined) {
-        queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
-      }
-      queryClient.invalidateQueries({ queryKey: historyKeys.all });
     },
   });
 };

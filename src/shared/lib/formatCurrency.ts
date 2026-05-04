@@ -3,5 +3,7 @@ export const formatCurrency = (amount: number) => {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: false,
   }).format(amount);
 };

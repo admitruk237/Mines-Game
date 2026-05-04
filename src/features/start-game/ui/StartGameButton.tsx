@@ -4,6 +4,8 @@ import { useBetAmount, useBetStatus } from '@/features/place-bet';
 import { useMinesCount } from '@/features/select-mines';
 import { Button, LoadingOverlay } from '@/shared/ui';
 import { MIN_LOADER_DISPLAY_MS } from '@/shared/config';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
+import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 export const StartGameButton = () => {
   const betAmount = useBetAmount();
@@ -24,6 +26,7 @@ export const StartGameButton = () => {
   }, [isPending, isDelaying]);
 
   const handleStartGame = () => {
+    soundManager.play(SOUND_KEYS.CLICK);
     setIsDelaying(true);
     startGame(betAmount, minesCount);
   };

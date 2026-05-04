@@ -1,6 +1,5 @@
-import { Button } from '@/shared/ui';
+import { Button, GameModal } from '@/shared/ui';
 import { formatCurrency } from '@/shared/lib';
-import { ResultModal } from './ResultModal';
 
 interface Props {
   betAmount: number;
@@ -9,7 +8,7 @@ interface Props {
 
 export const LossOverlay = ({ betAmount, onReset }: Props) => {
   return (
-    <ResultModal onReset={onReset} height="lg:h-[306px] h-auto" variant="loss">
+    <GameModal onReset={onReset} height="lg:h-[306px] h-auto" variant="loss">
       <span className="text-[40px] lg:text-[48px] leading-tight filter drop-shadow-md">💣</span>
 
       <div className="flex flex-col gap-1 lg:gap-2">
@@ -32,6 +31,6 @@ export const LossOverlay = ({ betAmount, onReset }: Props) => {
           Try Again
         </Button>
       </div>
-    </ResultModal>
+    </GameModal>
   );
 };

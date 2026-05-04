@@ -1,33 +1,37 @@
 import { describe, expect, it } from 'vitest';
 import { validateBet } from './validateBet';
+import { MAX_BET } from '@/shared/config';
 
 describe('validateBet', () => {
-  it('should return invalid if bet is 0', () => {
-    const result = validateBet(0, 1000);
-    expect(result.isValid).toBe(false);
-    expect(result.error).toBe('Bet must be greater than 0');
+  const balance = 50000;
+
+  it('validates a correct bet', () => {
+    expect(validateBet(100, balance)).toEqual({ isValid: true });
   });
 
-  it('should return invalid if bet is less than 0', () => {
-    const result = validateBet(-10, 1000);
-    expect(result.isValid).toBe(false);
-    expect(result.error).toBe('Bet must be greater than 0');
+  it('rejects zero or negative bets', () => {
+    expect(validateBet(0, balance).isValid).toBe(false);
+    expect(validateBet(-10, balance).isValid).toBe(false);
   });
 
-  it('should return invalid if bet is greater than balance', () => {
-    const result = validateBet(2000, 1000);
+  it('rejects bets exceeding balance', () => {
+    const result = validateBet(balance + 1, balance);
     expect(result.isValid).toBe(false);
     expect(result.error).toBe('Insufficient balance');
   });
 
-  it('should return valid if bet equals balance', () => {
-    const result = validateBet(1000, 1000);
-    expect(result.isValid).toBe(true);
-    expect(result.error).toBeUndefined();
+  it('rejects bets exceeding MAX_BET', () => {
+    const result = validateBet(MAX_BET + 1, balance);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toContain(`Max bet is ${MAX_BET.toLocaleString()}`);
   });
 
-  it('should return valid if bet is within balance', () => {
-    const result = validateBet(50, 1000);
-    expect(result.isValid).toBe(true);
+  it('accepts a bet equal to balance if within MAX_BET', () => {
+    const smallBalance = 100;
+    expect(validateBet(smallBalance, smallBalance)).toEqual({ isValid: true });
+  });
+
+  it('accepts a bet equal to MAX_BET if within balance', () => {
+    expect(validateBet(MAX_BET, balance)).toEqual({ isValid: true });
   });
 });

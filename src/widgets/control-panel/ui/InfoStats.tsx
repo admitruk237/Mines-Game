@@ -1,6 +1,6 @@
 import { type Game } from '@/entities/game';
 import { StatRow } from '@/shared/ui';
-import { cn, formatCurrency } from '@/shared/lib';
+import { cn, formatCurrency, mulCents } from '@/shared/lib';
 import { TOTAL_CELLS } from '@/shared/config';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export const InfoStats = ({ game }: Props) => {
   const gemsFound = game.gemsFound ?? 0;
-  const currentProfit = game.betAmount * (game.currentMultiplier - 1);
+  const currentProfit = mulCents(game.betAmount, game.currentMultiplier - 1);
 
   return (
     <div className="flex flex-col lg:gap-1 gap-4 w-full">

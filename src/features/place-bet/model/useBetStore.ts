@@ -13,7 +13,23 @@ export const useBetStore = create<BetState>()(
       betAmount: 10.0,
       setBetAmount: (amount) => set({ betAmount: amount }),
     }),
-    { name: 'mines-bet-storage' }
+    {
+      name: 'mines-bet-storage',
+      version: 1,
+      migrate: (persistedState: unknown, version: number) => {
+        if (version === 0) {
+          return { betAmount: 10.0 };
+        }
+
+        const state = persistedState as Partial<BetState>;
+        if (typeof state?.betAmount !== 'number') {
+          return { betAmount: 10.0 };
+        }
+
+        return state as BetState;
+      },
+      partialize: (state) => ({ betAmount: state.betAmount }),
+    }
   )
 );
 
