@@ -1,0 +1,53 @@
+import { useCallback } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { CELL_TYPE, GAME_STATUS, useRevealCell } from '@/entities/game';
+import { balanceKeys } from '@/entities/balance';
+import { historyKeys } from '@/entities/history';
+import { useClearPending, usePendingCellsStore, useSetPending } from '../';
+import { soundManager } from '@/shared/lib/sounds/soundManager';
+import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
+
+export const useRevealCellAction = (gameId: string | null) => {
+  const queryClient = useQueryClient();
+  const setPending = useSetPending();
+  const clearPending = useClearPending();
+  const revealMutation = useRevealCell(gameId);
+
+  const reveal = useCallback(
+    (row: number, col: number) => {
+      const isAnyPending = Boolean(usePendingCellsStore.getState().pendingCell);
+      if (!gameId || isAnyPending) return;
+
+      setPending(row, col);
+
+      revealMutation.mutate(
+        { row, col },
+        {
+          onSuccess: (response) => {
+            if (response.result === CELL_TYPE.GEM) {
+              soundManager.play(SOUND_KEYS.REVEAL);
+            } else if (response.result === CELL_TYPE.MINE) {
+              soundManager.play(SOUND_KEYS.LOSE);
+            }
+
+            if (response.status === GAME_STATUS.LOST) {
+              if (response.balance !== undefined) {
+                queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
+              }
+              queryClient.invalidateQueries({ queryKey: historyKeys.all });
+            }
+          },
+          onSettled: () => {
+            clearPending();
+          },
+        }
+      );
+    },
+    [gameId, setPending, clearPending, revealMutation.mutate, queryClient]
+  );
+
+  return {
+    reveal,
+    isPending: revealMutation.isPending,
+  };
+};
