@@ -1,99 +1,81 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Game, RevealedCell } from './types';
 import { GRID_SIZE } from '@/shared/config';
 
 const STAGGER_DELAY_MS = 100;
 
-interface AnimationState {
-  order: string[];
-  revealIndex: number;
+interface RevealState {
+  index: number;
   gameId: string | null;
 }
 
 export const useStaggeredReveal = (game: Game | null) => {
-  const [animState, setAnimState] = useState<AnimationState>({
-    order: [],
-    revealIndex: 0,
-    gameId: null,
-  });
-
-  const [playerOpened, setPlayerOpened] = useState<Set<string>>(new Set());
+  const [revealState, setRevealState] = useState<RevealState>({ index: 0, gameId: null });
 
   const hasFullBoard = Boolean(game?.fullBoard);
   const gameId = game?.gameId ?? null;
 
-  if (game?.status === 'active') {
-    const currentCount = game.revealedCells.length;
-    if (currentCount !== playerOpened.size) {
-      const newSet = new Set<string>();
-      game.revealedCells.forEach((rc: RevealedCell) => newSet.add(`${rc.row}-${rc.col}`));
-      setPlayerOpened(newSet);
-    }
-  }
+  const playerOpened = useMemo(() => {
+    const set = new Set<string>();
+    game?.revealedCells?.forEach((rc: RevealedCell) => set.add(`${rc.row}-${rc.col}`));
+    return set;
+  }, [game]);
 
-  if (hasFullBoard && gameId && animState.gameId !== gameId) {
-    const newOrder: string[] = [];
+  const animOrder = useMemo(() => {
+    if (!hasFullBoard) return [];
+    const order: string[] = [];
     for (let r = 0; r < GRID_SIZE; r++) {
       for (let c = 0; c < GRID_SIZE; c++) {
         const key = `${r}-${c}`;
         if (!playerOpened.has(key)) {
-          newOrder.push(key);
+          order.push(key);
         }
       }
     }
-
-    setAnimState({
-      order: newOrder,
-      revealIndex: 0,
-      gameId: gameId,
-    });
-  } else if (game?.status === 'active' && animState.gameId !== null) {
-    setAnimState({
-      order: [],
-      revealIndex: 0,
-      gameId: null,
-    });
-  }
+    return order;
+  }, [hasFullBoard, playerOpened]);
 
   useEffect(() => {
-    if (!hasFullBoard || animState.order.length === 0) return;
-    if (animState.revealIndex >= animState.order.length) return;
+    if (hasFullBoard && gameId && revealState.gameId !== gameId) {
+      setRevealState({ index: 0, gameId });
+    } else if (!hasFullBoard && revealState.gameId !== null) {
+      setRevealState({ index: 0, gameId: null });
+    }
+  }, [hasFullBoard, gameId]);
+
+  useEffect(() => {
+    if (!hasFullBoard || animOrder.length === 0) return;
+    if (revealState.index >= animOrder.length) return;
 
     const timer = setTimeout(() => {
-      setAnimState((prev) => ({
-        ...prev,
-        revealIndex: prev.revealIndex + 1,
-      }));
+      setRevealState((prev) => ({ ...prev, index: prev.index + 1 }));
     }, STAGGER_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [hasFullBoard, animState.revealIndex, animState.order.length]);
+  }, [hasFullBoard, revealState.index, animOrder.length]);
 
-  const hiddenSet = new Set<string>();
-  if (hasFullBoard) {
-    if (animState.order.length > 0) {
-      for (let i = animState.revealIndex; i < animState.order.length; i++) {
-        const item = animState.order[i];
-        if (item !== undefined) {
-          hiddenSet.add(item);
-        }
+  const hiddenSet = useMemo(() => {
+    const set = new Set<string>();
+    if (!hasFullBoard) return set;
+
+    if (animOrder.length > 0) {
+      for (let i = revealState.index; i < animOrder.length; i++) {
+        const item = animOrder[i];
+        if (item !== undefined) set.add(item);
       }
     } else {
-      const currentRevealed = new Set(
-        game?.revealedCells.map((rc: RevealedCell) => `${rc.row}-${rc.col}`)
-      );
       for (let r = 0; r < GRID_SIZE; r++) {
         for (let c = 0; c < GRID_SIZE; c++) {
           const key = `${r}-${c}`;
-          if (!currentRevealed.has(key)) {
-            hiddenSet.add(key);
-          }
+          if (!playerOpened.has(key)) set.add(key);
         }
       }
     }
-  }
+
+    return set;
+  }, [hasFullBoard, animOrder, revealState.index, playerOpened]);
 
   const isRevealComplete =
-    hasFullBoard && animState.order.length > 0 && animState.revealIndex >= animState.order.length;
+    hasFullBoard && animOrder.length > 0 && revealState.index >= animOrder.length;
 
   return { hiddenSet, isRevealComplete };
 };

@@ -8,25 +8,28 @@ import type {
   RevealResponse,
 } from '../model/types';
 
-export const gameApi = {
-  create: (data: CreateGameRequest) =>
-    apiFetch<CreateGameResponse, CreateGameRequest>(ENDPOINTS.GAMES, {
+class GameApiService {
+  create(data: CreateGameRequest) {
+    return apiFetch<CreateGameResponse, CreateGameRequest>(ENDPOINTS.GAMES, {
       method: 'POST',
       body: data,
-    }),
+    });
+  }
 
-  reveal: (gameId: string, data: RevealRequest) =>
-    apiFetch<RevealResponse, RevealRequest>(ENDPOINTS.REVEAL(gameId), {
+  reveal(gameId: string, data: RevealRequest) {
+    return apiFetch<RevealResponse, RevealRequest>(ENDPOINTS.REVEAL(gameId), {
       method: 'POST',
       body: data,
-    }),
+    });
+  }
 
-  cashOut: (gameId: string) =>
-    apiFetch<CashOutResponse>(ENDPOINTS.CASHOUT(gameId), {
+  cashOut(gameId: string) {
+    return apiFetch<CashOutResponse>(ENDPOINTS.CASHOUT(gameId), {
       method: 'POST',
-    }),
+    });
+  }
 
-  getActive: async () => {
+  async getActive() {
     try {
       return await apiFetch<Game>(ENDPOINTS.ACTIVE_GAME);
     } catch (error) {
@@ -35,7 +38,11 @@ export const gameApi = {
       }
       throw error;
     }
-  },
+  }
 
-  getById: (gameId: string) => apiFetch<Game>(ENDPOINTS.GAME_BY_ID(gameId)),
-};
+  getById(gameId: string) {
+    return apiFetch<Game>(ENDPOINTS.GAME_BY_ID(gameId));
+  }
+}
+
+export const gameApi = new GameApiService();

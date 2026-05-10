@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useBalance } from '../api/queries';
 import { CountUp, Skeleton } from '@/shared/ui';
 import { formatCurrency } from '@/shared/lib';
@@ -11,11 +10,6 @@ interface Props {
 export const BalanceDisplay = ({ className }: Props) => {
   const { data, isLoading } = useBalance();
   const balance = data?.balance ?? 0;
-
-  useEffect(() => {
-    if (!isLoading && balance <= 0) {
-    }
-  }, [balance, isLoading]);
 
   if (isLoading) {
     return (
