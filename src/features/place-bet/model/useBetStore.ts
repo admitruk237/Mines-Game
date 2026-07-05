@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useShallow } from 'zustand/react/shallow';
+import { DEFAULT_BET } from '@/shared/config/game';
 
 interface BetState {
   betAmount: number;
@@ -10,7 +11,7 @@ interface BetState {
 export const useBetStore = create<BetState>()(
   persist(
     (set) => ({
-      betAmount: 10.0,
+      betAmount: DEFAULT_BET,
       setBetAmount: (amount) => set({ betAmount: amount }),
     }),
     {
@@ -18,12 +19,12 @@ export const useBetStore = create<BetState>()(
       version: 1,
       migrate: (persistedState: unknown, version: number) => {
         if (version === 0) {
-          return { betAmount: 10.0 };
+          return { betAmount: DEFAULT_BET };
         }
 
         const state = persistedState as Partial<BetState>;
         if (typeof state?.betAmount !== 'number') {
-          return { betAmount: 10.0 };
+          return { betAmount: DEFAULT_BET };
         }
 
         return state as BetState;

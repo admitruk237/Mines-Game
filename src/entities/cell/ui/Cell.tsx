@@ -3,7 +3,7 @@ import { memo, type ReactNode } from 'react';
 import { cva } from 'class-variance-authority';
 import { Loader2 } from 'lucide-react';
 import { CELL_STATE, type CellState } from '../model/types';
-import { CELL_TYPE } from '@/entities/game';
+import { CELL_TYPE } from '@/shared/config/game';
 import { CellIcon } from './CellIcon';
 import { cn } from '@/shared/lib/utils';
 import { soundManager } from '@/shared/lib/sounds/soundManager';

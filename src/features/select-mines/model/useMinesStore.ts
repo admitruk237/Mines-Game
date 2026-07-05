@@ -7,13 +7,19 @@ interface MinesState {
   setMinesCount: (count: number) => void;
 }
 
+type PersistedMines = Pick<MinesState, 'minesCount'>;
+
 export const useMinesStore = create<MinesState>()(
   persist(
     (set) => ({
       minesCount: 3,
       setMinesCount: (count) => set({ minesCount: count }),
     }),
-    { name: 'mines-count-storage' }
+    {
+      name: 'mines-count-storage',
+      version: 1,
+      partialize: (s): PersistedMines => ({ minesCount: s.minesCount }),
+    }
   )
 );
 

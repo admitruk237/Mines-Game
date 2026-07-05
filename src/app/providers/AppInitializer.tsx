@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useRestoreSession } from '@/entities/game';
 import { useMinimumLoading } from '@/shared/lib';
 import { LoadingOverlay } from '@/shared/ui';

@@ -1,17 +1,7 @@
-export const GAME_STATUS = {
-  ACTIVE: 'active',
-  WON: 'won',
-  LOST: 'lost',
-} as const;
+import type { CellType, GAME_STATUS, GameStatus } from '@/shared/config/game';
 
-export type GameStatus = (typeof GAME_STATUS)[keyof typeof GAME_STATUS];
-
-export const CELL_TYPE = {
-  GEM: 'gem',
-  MINE: 'mine',
-} as const;
-
-export type CellType = (typeof CELL_TYPE)[keyof typeof CELL_TYPE];
+export { CELL_TYPE, GAME_STATUS } from '@/shared/config/game';
+export type { CellType, GameStatus } from '@/shared/config/game';
 
 export interface CellPosition {
   row: number;

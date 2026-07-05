@@ -7,6 +7,7 @@ export const SoundToggle = () => {
 
   return (
     <button
+      type="button"
       onClick={toggleMute}
       title={isMuted ? 'Unmute' : 'Mute'}
       className="cursor-pointer transition-opacity hover:opacity-80 outline-none"
