@@ -1,4 +1,4 @@
-import { type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { StatRow } from '@/shared/ui';
 import { cn, formatCurrency, mulCents } from '@/shared/lib';
 import { TOTAL_CELLS } from '@/shared/config';

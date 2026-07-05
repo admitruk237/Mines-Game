@@ -62,7 +62,7 @@ export const BetAmountInput = ({ disabled }: Props) => {
           placeholder="0.00"
           className="px-4"
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-md  text-slate-600">$</div>
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-md  text-text-muted">$</div>
       </div>
     </div>
   );

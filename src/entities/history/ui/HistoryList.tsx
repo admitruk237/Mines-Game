@@ -12,18 +12,18 @@ export const HistoryList = () => {
     ));
   }
 
-  if (history.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center py-10 text-center opacity-40">
-        <span className="text-xs font-medium text-text-muted">No games yet</span>
-      </div>
-    );
-  }
-
   if (isError) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center opacity-40">
         <span className="text-xs font-medium text-text-loss">Failed to load history</span>
+      </div>
+    );
+  }
+
+  if (history.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 text-center opacity-40">
+        <span className="text-xs font-medium text-text-muted">No games yet</span>
       </div>
     );
   }

@@ -41,7 +41,7 @@ export const useStaggeredReveal = (game: Game | null) => {
     } else if (!hasFullBoard && revealState.gameId !== null) {
       setRevealState({ index: 0, gameId: null });
     }
-  }, [hasFullBoard, gameId]);
+  }, [hasFullBoard, gameId, revealState.gameId]);
 
   useEffect(() => {
     if (!hasFullBoard || animOrder.length === 0) return;

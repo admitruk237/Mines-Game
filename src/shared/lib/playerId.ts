@@ -13,11 +13,6 @@ export const getPlayerId = (): string => {
   return id;
 };
 
-export const resetPlayerId = () => {
-  localStorage.removeItem(STORAGE_KEY);
-  window.location.reload();
-};
-
 export const incrementPlayerId = () => {
   if (typeof window === 'undefined') return;
 

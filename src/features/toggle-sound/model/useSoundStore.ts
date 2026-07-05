@@ -7,6 +7,8 @@ interface SoundState {
   toggleMute: () => void;
 }
 
+type PersistedSound = Pick<SoundState, 'isMuted'>;
+
 export const useSoundStore = create<SoundState>()(
   subscribeWithSelector(
     persist(
@@ -14,7 +16,11 @@ export const useSoundStore = create<SoundState>()(
         isMuted: false,
         toggleMute: () => set((state) => ({ isMuted: !state.isMuted })),
       }),
-      { name: 'mines-sound-storage' }
+      {
+        name: 'mines-sound-storage',
+        version: 1,
+        partialize: (s): PersistedSound => ({ isMuted: s.isMuted }),
+      }
     )
   )
 );

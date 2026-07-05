@@ -1,12 +1,12 @@
 import { Howl, Howler } from 'howler';
-import { GAME_SOUNDS, type SoundKey } from '../constants/sounds';
+import { GAME_SOUNDS, SOUND_VOLUME, type SoundKey } from '../constants/sounds';
 
 const sounds: Record<SoundKey, Howl> = {
-  click: new Howl({ src: [GAME_SOUNDS.click], preload: true, volume: 0.4 }),
-  cashout: new Howl({ src: [GAME_SOUNDS.cashout], preload: true, volume: 0.4 }),
-  lose: new Howl({ src: [GAME_SOUNDS.lose], preload: true, volume: 0.4 }),
-  reveal: new Howl({ src: [GAME_SOUNDS.reveal], preload: true, volume: 0.4 }),
-  bet: new Howl({ src: [GAME_SOUNDS.bet], preload: true, volume: 0.4 }),
+  click: new Howl({ src: [GAME_SOUNDS.click], preload: true, volume: SOUND_VOLUME }),
+  cashout: new Howl({ src: [GAME_SOUNDS.cashout], preload: true, volume: SOUND_VOLUME }),
+  lose: new Howl({ src: [GAME_SOUNDS.lose], preload: true, volume: SOUND_VOLUME }),
+  reveal: new Howl({ src: [GAME_SOUNDS.reveal], preload: true, volume: SOUND_VOLUME }),
+  bet: new Howl({ src: [GAME_SOUNDS.bet], preload: true, volume: SOUND_VOLUME }),
 };
 
 export const soundManager = {

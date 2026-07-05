@@ -4,6 +4,7 @@ import { ControlPanel } from '@/widgets/control-panel';
 import { GameHistory } from '@/widgets/game-history';
 import { useActiveGameStatus } from '@/entities/game';
 import { CashOutButton } from '@/features/cash-out';
+import { OutOfFundsModal } from '@/features/out-of-funds';
 import { StartGameButton } from '@/features/start-game';
 
 export const GamePage = () => {
@@ -34,6 +35,8 @@ export const GamePage = () => {
           {isActive && gameId ? <CashOutButton gameId={gameId} /> : <StartGameButton />}
         </div>
       </div>
+
+      <OutOfFundsModal />
     </div>
   );
 };

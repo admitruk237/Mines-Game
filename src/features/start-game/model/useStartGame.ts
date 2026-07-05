@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCreateGame, useSetGameId } from '@/entities/game';
-import { balanceKeys } from '@/entities/balance';
+import { setBalanceCache } from '@/entities/balance';
 import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
@@ -16,10 +16,7 @@ export const useStartGame = () => {
         onSuccess: (data) => {
           soundManager.play(SOUND_KEYS.BET);
           setGameId(data.gameId);
-
-          if (data.balance !== undefined) {
-            queryClient.setQueryData(balanceKeys.all, { balance: data.balance });
-          }
+          setBalanceCache(queryClient, data.balance);
         },
       }
     );

@@ -5,7 +5,10 @@ import { gameApi } from './gameApi';
 export const useGame = (gameId: string | null) => {
   return useQuery({
     queryKey: gameKeys.detail(gameId ?? 'none'),
-    queryFn: () => gameApi.getById(gameId!),
+    queryFn: () => {
+      if (!gameId) return Promise.reject(new Error('gameId required'));
+      return gameApi.getById(gameId);
+    },
     enabled: Boolean(gameId),
   });
 };

@@ -1,5 +1,5 @@
 import type { HistoryItem as HistoryEntry } from '../model/types';
-import { GAME_STATUS } from '@/entities/game';
+import { GAME_STATUS } from '@/shared/config/game';
 import { cn, formatCurrency } from '@/shared/lib';
 
 interface Props {

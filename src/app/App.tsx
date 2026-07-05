@@ -4,7 +4,7 @@ import './main.css';
 
 export const App = () => {
   return (
-    <div className="text-white selection:bg-blue-500/30">
+    <div className="text-white selection:bg-active-blue/30">
       <AppInitializer>
         <GamePage />
       </AppInitializer>
