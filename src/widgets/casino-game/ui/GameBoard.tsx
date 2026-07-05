@@ -30,7 +30,7 @@ export const GameBoard = ({ game, hiddenSet }: Props) => {
           const key = `${r}-${c}`;
           const isCurrentPending = pendingCell?.row === r && pendingCell?.col === c;
 
-          let finalState = hiddenSet.has(key) ? CELL_STATE.HIDDEN : state;
+          let finalState = hiddenSet.has(key) ? CELL_STATE.INACTIVE : state;
           if (isCurrentPending) finalState = CELL_STATE.LOADING;
 
           return (
