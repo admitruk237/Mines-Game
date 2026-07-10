@@ -1,4 +1,5 @@
 import { useCashOut } from '../model/useCashOut';
+import { CASH_OUT_LABELS } from '../model/constants';
 import { useGame } from '@/entities/game';
 import { Button } from '@/shared/ui';
 import { Loader2 } from 'lucide-react';
@@ -35,7 +36,7 @@ export const CashOutButton = ({ gameId }: Props) => {
       {isPending ? (
         <Loader2 className="w-5 h-5 animate-spin" />
       ) : (
-        `Cash Out — ${formatCurrency(winAmount)}`
+        `${CASH_OUT_LABELS.CASH_OUT}${formatCurrency(winAmount)}`
       )}
     </Button>
   );

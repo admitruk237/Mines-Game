@@ -7,11 +7,11 @@ import { CashOutButton } from '@/features/cash-out';
 import { Card } from '@/shared/ui/card';
 import { InfoStats } from './InfoStats';
 
-interface ActiveGamePanelProps {
+interface Props {
   gameId: string;
 }
 
-const ActiveGamePanel = ({ gameId }: ActiveGamePanelProps) => {
+const ActiveGamePanel = ({ gameId }: Props) => {
   const { data: game = null } = useGame(gameId);
   if (!game) return null;
   return (

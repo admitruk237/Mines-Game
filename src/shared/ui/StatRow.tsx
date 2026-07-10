@@ -8,17 +8,17 @@ interface Props {
   className?: string;
 }
 
-export const StatRow = ({ label, value, tone = 'default', className }: Props) => {
-  const toneClasses = {
-    default: 'text-white',
-    positive: 'text-text-win',
-    negative: 'text-text-loss',
-  };
+const TONE_CLASSES = {
+  default: 'text-white',
+  positive: 'text-text-win',
+  negative: 'text-text-loss',
+} as const;
 
+export const StatRow = ({ label, value, tone = 'default', className }: Props) => {
   return (
-    <div className={cn('flex justify-between items-center py-2 ', className)}>
+    <div className={cn('flex justify-between items-center py-2', className)}>
       <span className="text-xs font-medium text-text-muted uppercase tracking-wider">{label}</span>
-      <span className={cn('text-sm font-bold font-mono', toneClasses[tone])}>{value}</span>
+      <span className={cn('text-sm font-bold font-mono', TONE_CLASSES[tone])}>{value}</span>
     </div>
   );
 };

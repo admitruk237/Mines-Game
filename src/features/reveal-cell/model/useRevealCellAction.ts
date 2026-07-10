@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { CELL_TYPE, GAME_STATUS, useRevealCell } from '@/entities/game';
-import { balanceKeys } from '@/entities/balance';
+import { setBalanceCache } from '@/entities/balance';
 import { historyKeys } from '@/entities/history';
-import { useClearPending, usePendingCellsStore, useSetPending } from '../';
+import { useClearPending, usePendingCellsStore, useSetPending } from './usePendingCellsStore';
 import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
@@ -18,6 +18,7 @@ export const useRevealCellAction = (gameId: string | null) => {
       const isAnyPending = Boolean(usePendingCellsStore.getState().pendingCell);
       if (!gameId || isAnyPending) return;
 
+      soundManager.play(SOUND_KEYS.CLICK);
       setPending(row, col);
 
       revealMutation.mutate(
@@ -31,9 +32,7 @@ export const useRevealCellAction = (gameId: string | null) => {
             }
 
             if (response.status === GAME_STATUS.LOST) {
-              if (response.balance !== undefined) {
-                queryClient.setQueryData(balanceKeys.all, { balance: response.balance });
-              }
+              setBalanceCache(queryClient, response.balance);
               queryClient.invalidateQueries({ queryKey: historyKeys.all });
             }
           },

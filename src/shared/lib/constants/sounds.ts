@@ -15,3 +15,5 @@ export const SOUND_KEYS = {
 } as const;
 
 export type SoundKey = keyof typeof GAME_SOUNDS;
+
+export const SOUND_VOLUME = 0.4;

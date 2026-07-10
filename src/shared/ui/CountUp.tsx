@@ -26,5 +26,3 @@ export const CountUp = (props: CountUpProps) => {
 
   return <span ref={countUpRef} className={props.className} />;
 };
-
-export type { CountUpProps };

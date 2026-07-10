@@ -1,5 +1,6 @@
 import type { HistoryItem as HistoryEntry } from '../model/types';
-import { GAME_STATUS } from '@/entities/game';
+import { HISTORY_LABELS } from '../model/constants';
+import { GAME_STATUS } from '@/shared/config/game';
 import { cn, formatCurrency } from '@/shared/lib';
 
 interface Props {
@@ -22,20 +23,16 @@ export const HistoryItem = ({ entry }: Props) => {
             {entry.multiplier.toFixed(2)}x
           </span>
         ) : (
-          <span className="md:text-sm text-xs leading-[14px] mt-[3px]">💣</span>
+          <span className="md:text-sm text-xs leading-[14px] mt-[3px]">
+            {HISTORY_LABELS.MINE_EMOJI}
+          </span>
         )}
       </div>
 
       <div className="flex justify-between items-end w-full leading-[21px]">
-        {isWin ? (
-          <span className="font-mono text-[12px] font-normal text-text-muted leading-[18px] pb-[2px]">
-            win
-          </span>
-        ) : (
-          <span className="font-mono text-[12px] font-normal text-text-muted leading-[18px] pb-[2px]">
-            BUST
-          </span>
-        )}
+        <span className="font-mono text-[12px] font-normal text-text-muted leading-[18px] pb-[2px]">
+          {isWin ? HISTORY_LABELS.WIN : HISTORY_LABELS.BUST}
+        </span>
 
         <span
           className={cn(

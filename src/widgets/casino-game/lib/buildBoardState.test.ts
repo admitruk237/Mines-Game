@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildBoardState } from './buildBoardState';
 import { CELL_STATE } from '@/entities/cell';
-import { CELL_TYPE, GAME_STATUS } from '@/entities/game/model/types';
+import { CELL_TYPE, GAME_STATUS } from '@/entities/game';
 import { GRID_SIZE } from '@/shared/config/game';
 
 const G = CELL_TYPE.GEM;

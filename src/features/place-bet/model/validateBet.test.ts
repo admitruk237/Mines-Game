@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { validateBet } from './validateBet';
-import { MAX_BET } from '@/shared/config';
+import { MAX_BET } from './constants';
 
 describe('validateBet', () => {
   const balance = 50000;

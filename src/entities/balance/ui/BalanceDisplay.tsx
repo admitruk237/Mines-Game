@@ -1,7 +1,7 @@
 import { useBalance } from '../api/queries';
+import { BALANCE_LABELS } from '../model/constants';
 import { CountUp, Skeleton } from '@/shared/ui';
 import { formatCurrency } from '@/shared/lib';
-import { OutOfFundsModal } from '@/features/out-of-funds';
 
 interface Props {
   className?: string;
@@ -15,7 +15,7 @@ export const BalanceDisplay = ({ className }: Props) => {
     return (
       <div className="flex items-center gap-2">
         <span className="font-sans text-[12px] font-normal text-text-muted leading-[18px]">
-          Balance
+          {BALANCE_LABELS.BALANCE}
         </span>
         <Skeleton className="h-6 w-32 bg-skeleton-bg rounded-md" />
       </div>
@@ -23,25 +23,21 @@ export const BalanceDisplay = ({ className }: Props) => {
   }
 
   return (
-    <>
-      <div
-        className={className}
-        aria-live="polite"
-        aria-label={`Current balance: ${formatCurrency(balance)}`}
-      >
-        <div className="flex items-center justify-between">
-          <span className="font-sans text-[12px] font-normal text-text-muted leading-[18px] mr-3">
-            Balance
-          </span>
-          <CountUp
-            end={balance}
-            formattingFn={formatCurrency}
-            className="font-mono text-sm md:text-base font-bold text-text-balance leading-[24px]"
-          />
-        </div>
+    <div
+      className={className}
+      aria-live="polite"
+      aria-label={`Current balance: ${formatCurrency(balance)}`}
+    >
+      <div className="flex items-center justify-between">
+        <span className="font-sans text-[12px] font-normal text-text-muted leading-[18px] mr-3">
+          {BALANCE_LABELS.BALANCE}
+        </span>
+        <CountUp
+          end={balance}
+          formattingFn={formatCurrency}
+          className="font-mono text-sm md:text-base font-bold text-text-balance leading-[24px]"
+        />
       </div>
-
-      <OutOfFundsModal />
-    </>
+    </div>
   );
 };

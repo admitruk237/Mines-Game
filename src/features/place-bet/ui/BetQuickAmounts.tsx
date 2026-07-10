@@ -1,6 +1,6 @@
 import { useSetBetAmount } from '../model/useBetStore';
+import { QUICK_BET_AMOUNTS } from '../model/constants';
 import { Button } from '@/shared/ui';
-import { QUICK_BET_AMOUNTS } from '@/shared/config';
 import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 

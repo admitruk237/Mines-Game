@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { OUT_OF_FUNDS_LABELS } from '../model/constants';
 import { useBalance } from '@/entities/balance';
 import { useGameId } from '@/entities/game';
 import { Button, GameModal } from '@/shared/ui';
@@ -38,16 +39,16 @@ export const OutOfFundsModal = () => {
 
       <div className="flex flex-col gap-1 lg:gap-2">
         <h2 className="text-white text-center font-sans text-[18px] lg:text-[20px] font-bold leading-tight tracking-tight">
-          Out of Funds
+          {OUT_OF_FUNDS_LABELS.TITLE}
         </h2>
         <p className="text-text-info text-center font-mono text-[14px] lg:text-[16px] font-medium leading-tight px-4">
-          Your balance has reached zero. Would you like to start fresh with a new balance?
+          {OUT_OF_FUNDS_LABELS.DESCRIPTION}
         </p>
       </div>
 
       <div className="w-full mt-6 flex justify-center">
         <Button variant="primary-blue" size="play" onClick={handleStartFresh} className="w-full">
-          Start Fresh
+          {OUT_OF_FUNDS_LABELS.START_FRESH}
         </Button>
       </div>
     </GameModal>

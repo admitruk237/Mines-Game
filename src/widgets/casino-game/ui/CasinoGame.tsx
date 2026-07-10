@@ -1,6 +1,7 @@
 import { useGame, useGameId, useStaggeredReveal } from '@/entities/game';
 import { GameBoard } from './GameBoard';
 import { GameResultOverlay } from './GameResultOverlay';
+import { STATUS_LABELS } from '../model/constants';
 import { TOTAL_CELLS } from '@/shared/config';
 
 export const CasinoGame = () => {
@@ -13,8 +14,9 @@ export const CasinoGame = () => {
       <div className="w-full lg:max-w-[500px] relative">
         {game && (
           <div className="mb-4 text-center font-sans text-[12px] font-normal leading-[18px] text-text-status">
-            {game.minesCount} Mines · {game.gemsFound || 0} gems found ·{' '}
-            {TOTAL_CELLS - game.minesCount - (game.gemsFound || 0)} remaining
+            {game.minesCount} {STATUS_LABELS.MINES} · {game.gemsFound ?? 0}{' '}
+            {STATUS_LABELS.GEMS_FOUND} · {TOTAL_CELLS - game.minesCount - (game.gemsFound ?? 0)}{' '}
+            {STATUS_LABELS.REMAINING}
           </div>
         )}
 

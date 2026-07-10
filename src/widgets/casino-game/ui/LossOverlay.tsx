@@ -1,5 +1,6 @@
 import { Button, GameModal } from '@/shared/ui';
 import { formatCurrency } from '@/shared/lib';
+import { RESULT_LABELS } from '../model/constants';
 
 interface Props {
   betAmount: number;
@@ -13,11 +14,11 @@ export const LossOverlay = ({ betAmount, onReset }: Props) => {
 
       <div className="flex flex-col gap-1 lg:gap-2">
         <h2 className="text-white text-center font-sans text-[18px] lg:text-[20px] font-bold leading-tight tracking-tight">
-          Busted
+          {RESULT_LABELS.LOSS_TITLE}
         </h2>
 
         <p className="text-text-loss text-center font-mono text-[16px] lg:text-[18px] font-bold leading-tight">
-          {formatCurrency(betAmount)} lost
+          {formatCurrency(betAmount)} {RESULT_LABELS.LOST_SUFFIX}
         </p>
       </div>
 
@@ -28,7 +29,7 @@ export const LossOverlay = ({ betAmount, onReset }: Props) => {
           onClick={onReset}
           className="w-full max-w-[316px]"
         >
-          Try Again
+          {RESULT_LABELS.TRY_AGAIN}
         </Button>
       </div>
     </GameModal>

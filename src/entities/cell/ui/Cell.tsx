@@ -3,11 +3,9 @@ import { memo, type ReactNode } from 'react';
 import { cva } from 'class-variance-authority';
 import { Loader2 } from 'lucide-react';
 import { CELL_STATE, type CellState } from '../model/types';
-import { CELL_TYPE } from '@/entities/game';
+import { CELL_TYPE } from '@/shared/config/game';
 import { CellIcon } from './CellIcon';
 import { cn } from '@/shared/lib/utils';
-import { soundManager } from '@/shared/lib/sounds/soundManager';
-import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
 const cellVariants = cva(
   'aspect-square flex items-center justify-center rounded-[14px] transition-all select-none w-full border border-solid duration-75',
@@ -49,7 +47,6 @@ export const Cell = memo(({ state, row, col, onReveal, ariaLabel }: Props) => {
 
   const handleClick = () => {
     if (isClickable) {
-      soundManager.play(SOUND_KEYS.CLICK);
       onReveal(row, col);
     }
   };

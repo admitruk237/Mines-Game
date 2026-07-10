@@ -1,4 +1,5 @@
 import { useMinesState } from '../model/useMinesStore';
+import { MINES_LABELS } from '../model/constants';
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui';
 import { TOTAL_CELLS } from '@/shared/config';
 
@@ -20,7 +21,9 @@ export const MinesCountSelector = ({ disabled }: Props) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <span className="text-[12px] uppercase text-text-muted tracking-wider">Mines</span>
+      <span className="text-[12px] uppercase text-text-muted tracking-wider">
+        {MINES_LABELS.TITLE}
+      </span>
       <ToggleGroup
         value={[minesCount.toString()]}
         onValueChange={handleValueChange}

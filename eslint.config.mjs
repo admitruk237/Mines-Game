@@ -9,11 +9,9 @@ import tsParser from '@typescript-eslint/parser';
 
 const eslintConfig = defineConfig([
   globalIgnores([
-    '.next/**',
-    'out/**',
+    'dist/**',
     'build/**',
     'node_modules/**',
-    'next-env.d.ts',
     '*.config.js',
     '*.config.mjs',
   ]),
