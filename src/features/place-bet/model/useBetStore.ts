@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useShallow } from 'zustand/react/shallow';
-import { DEFAULT_BET } from '@/shared/config/game';
+import { DEFAULT_BET } from './constants';
 
 interface BetState {
   betAmount: number;

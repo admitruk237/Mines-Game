@@ -1,5 +1,6 @@
 import { Button, GameModal } from '@/shared/ui';
 import { formatCurrency } from '@/shared/lib';
+import { RESULT_LABELS } from '../model/constants';
 
 interface Props {
   winAmount: number;
@@ -15,7 +16,7 @@ export const WinOverlay = ({ winAmount, profit, multiplier, onReset }: Props) =>
 
       <div className="flex flex-col gap-1 lg:gap-2">
         <h2 className="text-white text-center font-sans text-[18px] lg:text-[20px] font-bold leading-tight tracking-tight">
-          Cashed Out!
+          {RESULT_LABELS.WIN_TITLE}
         </h2>
 
         <p className="text-text-win text-center font-mono text-[28px] lg:text-[32px] font-bold leading-tight">
@@ -27,7 +28,7 @@ export const WinOverlay = ({ winAmount, profit, multiplier, onReset }: Props) =>
         </p>
 
         <p className="text-text-win text-center font-mono text-[12px] lg:text-[14px] font-normal leading-tight">
-          +{formatCurrency(profit)} profit
+          +{formatCurrency(profit)} {RESULT_LABELS.PROFIT_SUFFIX}
         </p>
       </div>
 
@@ -38,7 +39,7 @@ export const WinOverlay = ({ winAmount, profit, multiplier, onReset }: Props) =>
           onClick={onReset}
           className="w-full max-w-[316px]"
         >
-          Play Again
+          {RESULT_LABELS.PLAY_AGAIN}
         </Button>
       </div>
     </GameModal>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { balanceKeys } from '@/entities/balance/model/queryKeys';
+import { balanceKeys } from '../model/queryKeys';
 import { balanceApi } from './balanceApi';
 
 export const useBalance = () => {

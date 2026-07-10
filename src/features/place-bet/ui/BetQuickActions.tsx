@@ -1,8 +1,8 @@
 import { useBetState } from '../model/useBetStore';
+import { BET_LABELS, MAX_BET } from '../model/constants';
 import { useBalance } from '@/entities/balance';
 import { Button } from '@/shared/ui';
 import { mulCents } from '@/shared/lib';
-import { MAX_BET } from '@/shared/config';
 import { soundManager } from '@/shared/lib/sounds/soundManager';
 import { SOUND_KEYS } from '@/shared/lib/constants/sounds';
 
@@ -40,7 +40,7 @@ export const BetQuickActions = ({ disabled }: Props) => {
         disabled={disabled}
         className="w-full"
       >
-        1/2
+        {BET_LABELS.HALF}
       </Button>
       <Button
         variant="secondary-dark"
@@ -49,7 +49,7 @@ export const BetQuickActions = ({ disabled }: Props) => {
         disabled={disabled}
         className="w-full"
       >
-        x2
+        {BET_LABELS.DOUBLE}
       </Button>
       <Button
         variant="secondary-dark"
@@ -58,7 +58,7 @@ export const BetQuickActions = ({ disabled }: Props) => {
         disabled={disabled}
         className="w-full"
       >
-        Max
+        {BET_LABELS.MAX}
       </Button>
     </div>
   );

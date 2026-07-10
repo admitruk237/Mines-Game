@@ -1,0 +1,1 @@
+export const RESULT_OVERLAY_DELAY_MS = 800;

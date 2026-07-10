@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { buildBoardState, type Game } from '@/entities/game';
+import type { Game } from '@/entities/game';
 import { Cell, CELL_STATE, type CellState } from '@/entities/cell';
 import { usePendingCell, useRevealCellAction } from '@/features/reveal-cell';
+import { buildBoardState } from '../lib/buildBoardState';
 
 interface Props {
   game: Game | null;

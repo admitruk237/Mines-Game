@@ -6,7 +6,7 @@ import {
   GAME_STATUS,
   type GameStatus,
   type RevealedCell,
-} from '../model/types';
+} from '@/entities/game';
 
 import { GRID_SIZE } from '@/shared/config/game';
 

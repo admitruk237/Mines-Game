@@ -1,4 +1,5 @@
 import { useGameHistory } from '../api/queries';
+import { HISTORY_LABELS, HISTORY_SKELETON_COUNT } from '../model/constants';
 import { HistoryItem } from './HistoryItem';
 import { Skeleton } from '@/shared/ui';
 
@@ -7,7 +8,7 @@ export const HistoryList = () => {
   const history = data?.games ?? [];
 
   if (isLoading) {
-    return Array.from({ length: 10 }).map((_, i) => (
+    return Array.from({ length: HISTORY_SKELETON_COUNT }).map((_, i) => (
       <Skeleton key={i} className="h-[73px] w-[224px] bg-skeleton-bg/50 rounded-[10px] shrink-0" />
     ));
   }
@@ -15,7 +16,15 @@ export const HistoryList = () => {
   if (isError) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center opacity-40">
-        <span className="text-xs font-medium text-text-loss">Failed to load history</span>
+        <span className="text-xs font-medium text-text-loss">{HISTORY_LABELS.LOAD_ERROR}</span>
+      </div>
+    );
+  }
+
+  if (history.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-10 text-center opacity-40">
+        <span className="text-xs font-medium text-text-muted">{HISTORY_LABELS.EMPTY}</span>
       </div>
     );
   }

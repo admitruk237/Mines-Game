@@ -1,6 +1,7 @@
 import { type ChangeEvent, useState } from 'react';
 import { useBetState } from '../model/useBetStore';
 import { useBetStatus } from '../model/useBetStatus';
+import { BET_LABELS } from '../model/constants';
 import { Input } from '@/shared/ui';
 
 interface Props {
@@ -42,7 +43,7 @@ export const BetAmountInput = ({ disabled }: Props) => {
           htmlFor="bet-amount"
           className="text-[12px] uppercase text-text-muted tracking-wider"
         >
-          Bet Amount
+          {BET_LABELS.AMOUNT}
         </label>
         {hasError && (
           <span className="text-[10px] font-medium text-text-loss animate-in fade-in slide-in-from-right-1">
@@ -59,10 +60,10 @@ export const BetAmountInput = ({ disabled }: Props) => {
           onChange={handleChange}
           aria-invalid={hasError}
           disabled={disabled}
-          placeholder="0.00"
+          placeholder={BET_LABELS.PLACEHOLDER}
           className="px-4"
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-md  text-text-muted">$</div>
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-base text-text-muted">$</div>
       </div>
     </div>
   );

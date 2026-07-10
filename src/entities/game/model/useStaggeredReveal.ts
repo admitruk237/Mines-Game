@@ -35,13 +35,11 @@ export const useStaggeredReveal = (game: Game | null) => {
     return order;
   }, [hasFullBoard, playerOpened]);
 
-  useEffect(() => {
-    if (hasFullBoard && gameId && revealState.gameId !== gameId) {
-      setRevealState({ index: 0, gameId });
-    } else if (!hasFullBoard && revealState.gameId !== null) {
-      setRevealState({ index: 0, gameId: null });
-    }
-  }, [hasFullBoard, gameId, revealState.gameId]);
+  if (hasFullBoard && gameId && revealState.gameId !== gameId) {
+    setRevealState({ index: 0, gameId });
+  } else if (!hasFullBoard && revealState.gameId !== null) {
+    setRevealState({ index: 0, gameId: null });
+  }
 
   useEffect(() => {
     if (!hasFullBoard || animOrder.length === 0) return;
@@ -57,22 +55,13 @@ export const useStaggeredReveal = (game: Game | null) => {
     const set = new Set<string>();
     if (!hasFullBoard) return set;
 
-    if (animOrder.length > 0) {
-      for (let i = revealState.index; i < animOrder.length; i++) {
-        const item = animOrder[i];
-        if (item !== undefined) set.add(item);
-      }
-    } else {
-      for (let r = 0; r < GRID_SIZE; r++) {
-        for (let c = 0; c < GRID_SIZE; c++) {
-          const key = `${r}-${c}`;
-          if (!playerOpened.has(key)) set.add(key);
-        }
-      }
+    for (let i = revealState.index; i < animOrder.length; i++) {
+      const item = animOrder[i];
+      if (item !== undefined) set.add(item);
     }
 
     return set;
-  }, [hasFullBoard, animOrder, revealState.index, playerOpened]);
+  }, [hasFullBoard, animOrder, revealState.index]);
 
   const isRevealComplete =
     hasFullBoard && animOrder.length > 0 && revealState.index >= animOrder.length;

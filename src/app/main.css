@@ -7,6 +7,7 @@
 
 @theme {
   --z-header: 50;
+  --z-index-overlay: 100;
   --color-bg-main: #0e1119;
   --color-panel-bg: #111620;
 
@@ -68,7 +69,7 @@
     scrollbar-width: none;
   }
 
-  /* Приховуємо стрілочки в інпутах */
+  /* Hide number-input spin buttons */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;

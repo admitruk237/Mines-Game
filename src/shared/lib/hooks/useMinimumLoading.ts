@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useMinimumLoading = (isPending: boolean, minTime: number = 800) => {
+export const useMinimumLoading = (isPending: boolean, minTime: number) => {
   const [show, setShow] = useState(false);
   const [prevIsPending, setPrevIsPending] = useState(isPending);
 
